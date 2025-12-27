@@ -1,48 +1,103 @@
-import Image from "next/image";
+import HeroSection from './components/HeroSection';
+import CategoryGrid from './components/CategoryGrid';
+import NewArrivals from './components/NewArrivals';
+import { HeroContent, Category, Product } from './types';
 
-const STRAPI_URL = "http://localhost:1337";
-const isDev = process.env.NODE_ENV === "development";
+// Mock data - Replace with API calls to your backend
+const heroContent: HeroContent = {
+  title: 'Where elegance becomes everlasting.',
+  subtitle: 'Drawing inspiration from Ethiopian heritage and artistry, AK Jewelry crafts timeless works of art that celebrate your unique beauty and enduring brilliance.',
+  ctaText: 'Shop new arrivals',
+  ctaLink: '/new-arrivals',
+  backgroundImage: '/images/hero-background.jpg', // Replace with actual image path
+};
 
-async function getJewelry() {
-  const res = await fetch(`${STRAPI_URL}/api/jewelries?populate=*`, {
-    cache: "no-store",
-  });
+const categories: Category[] = [
+  {
+    id: '1',
+    name: 'RINGS',
+    image: '/images/ring-category.jpg', // Replace with actual image path
+    link: '/category/rings',
+  },
+  {
+    id: '2',
+    name: 'NECKLACE',
+    image: '/images/necklace-category.jpg', // Replace with actual image path
+    link: '/category/necklace',
+  },
+  {
+    id: '3',
+    name: 'BRACELETS',
+    image: '/images/bracelet-category.jpg', // Replace with actual image path
+    link: '/category/bracelets',
+  },
+  {
+    id: '4',
+    name: 'EARRINGS',
+    image: '/images/earrings-category.jpg', // Replace with actual image path
+    link: '/category/earrings',
+  },
+];
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data from Strapi");
-  }
+const newArrivals: Product[] = [
+  {
+    id: '1',
+    name: 'Emerald Gold Chain',
+    price: 24999,
+    image: '/images/product-1.jpg', // Replace with actual image path
+    link: '/product/emerald-gold-chain',
+  },
+  {
+    id: '2',
+    name: 'Emerald Gold Chain',
+    price: 24999,
+    image: '/images/product-2.jpg', // Replace with actual image path
+    link: '/product/emerald-gold-chain-2',
+  },
+  {
+    id: '3',
+    name: 'Emerald Gold Chain',
+    price: 24999,
+    image: '/images/product-3.jpg', // Replace with actual image path
+    link: '/product/emerald-gold-chain-3',
+  },
+  {
+    id: '4',
+    name: 'Emerald Gold Chain',
+    price: 24999,
+    image: '/images/product-4.jpg', // Replace with actual image path
+    link: '/product/emerald-gold-chain-4',
+  },
+];
 
-  return res.json();
-}
+// Example of how to fetch from backend (uncomment when ready):
+// async function getCategories() {
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/categories?populate=*`, {
+//     cache: 'no-store',
+//   });
+//   if (!res.ok) throw new Error('Failed to fetch categories');
+//   return res.json();
+// }
 
-export default async function Home() {
-  const jewelry = await getJewelry();
+// async function getNewArrivals() {
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products?filters[isNewArrival]=true&populate=*`, {
+//     cache: 'no-store',
+//   });
+//   if (!res.ok) throw new Error('Failed to fetch new arrivals');
+//   return res.json();
+// }
+
+export default function Home() {
+  // When ready to integrate with backend, uncomment:
+  // const categoriesData = await getCategories();
+  // const newArrivalsData = await getNewArrivals();
 
   return (
-    <main className="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {jewelry.data.map((item: any) => {
-        const image = item.images?.[0];
-
-        if (!image?.url) {
-          return null;
-        }
-
-        return (
-          <div key={item.id} className="border rounded p-4 flex flex-col gap-2">
-            <Image
-              src={`${STRAPI_URL}${image.url}`}
-              alt={item.description ?? "Jewelry image"}
-              width={300}
-              height={300}
-              unoptimized={isDev}
-              priority
-            />
-
-            <p className="font-medium">{item.description}</p>
-            <p className="text-sm text-gray-600">{item.price}</p>
-          </div>
-        );
-      })}
+    <main>
+      <HeroSection content={heroContent} />
+      <CategoryGrid categories={categories} />
+      <NewArrivals products={newArrivals} />
     </main>
   );
 }
+
