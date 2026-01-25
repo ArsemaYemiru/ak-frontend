@@ -3,101 +3,73 @@ import CategoryGrid from './components/CategoryGrid';
 import NewArrivals from './components/NewArrivals';
 import { HeroContent, Category, Product } from './types';
 
-// Mock data - Replace with API calls to your backend
 const heroContent: HeroContent = {
   title: 'Where elegance becomes everlasting.',
   subtitle: 'Drawing inspiration from Ethiopian heritage and artistry, AK Jewelry crafts timeless works of art that celebrate your unique beauty and enduring brilliance.',
   ctaText: 'Shop new arrivals',
   ctaLink: '/new-arrivals',
-  backgroundImage: '/images/hero-background.jpg', // Replace with actual image path
+  backgroundImage: '/images/hero-background.jpg',
 };
 
-const categories: Category[] = [
-  {
-    id: '1',
-    name: 'RINGS',
-    image: '/images/ring-category.jpg', // Replace with actual image path
-    link: '/category/rings',
-  },
-  {
-    id: '2',
-    name: 'NECKLACE',
-    image: '/images/necklace-category.jpg', // Replace with actual image path
-    link: '/category/necklace',
-  },
-  {
-    id: '3',
-    name: 'BRACELETS',
-    image: '/images/bracelet-category.jpg', // Replace with actual image path
-    link: '/category/bracelets',
-  },
-  {
-    id: '4',
-    name: 'EARRINGS',
-    image: '/images/earrings-category.jpg', // Replace with actual image path
-    link: '/category/earrings',
-  },
-];
+async function getAggregatedData() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+  const endpoints = [
+    { path: 'jeweleries', label: 'Jewelery', placeholder: '/images/hero-background.jpg' },
+    { path: 'necklaces', label: 'Necklace', placeholder: '/images/necklace-category.jpg' },
+    { path: 'earrings', label: 'Earring', placeholder: '/images/earrings-category.jpg' },
+    { path: 'bracelets', label: 'Bracelet', placeholder: '/images/bracelet-category.jpg' }
+  ];
 
-const newArrivals: Product[] = [
-  {
-    id: '1',
-    name: 'Emerald Gold Chain',
-    price: 24999,
-    image: '/images/product-1.jpg', // Replace with actual image path
-    link: '/product/emerald-gold-chain',
-  },
-  {
-    id: '2',
-    name: 'Emerald Gold Chain',
-    price: 24999,
-    image: '/images/product-2.jpg', // Replace with actual image path
-    link: '/product/emerald-gold-chain-2',
-  },
-  {
-    id: '3',
-    name: 'Emerald Gold Chain',
-    price: 24999,
-    image: '/images/product-3.jpg', // Replace with actual image path
-    link: '/product/emerald-gold-chain-3',
-  },
-  {
-    id: '4',
-    name: 'Emerald Gold Chain',
-    price: 24999,
-    image: '/images/product-4.jpg', // Replace with actual image path
-    link: '/product/emerald-gold-chain-4',
-  },
-];
+  // Calculate 15 days ago
+  const fifteenDaysAgo = new Date();
+  fifteenDaysAgo.setDate(fifteenDaysAgo.getDate() - 15);
+  const dateString = fifteenDaysAgo.toISOString();
 
-// Example of how to fetch from backend (uncomment when ready):
-// async function getCategories() {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/categories?populate=*`, {
-//     cache: 'no-store',
-//   });
-//   if (!res.ok) throw new Error('Failed to fetch categories');
-//   return res.json();
-// }
+  try {
+    const results = await Promise.all(
+      endpoints.map(e => fetch(`${apiUrl}/api/${e.path}?filters[createdAt][$gte]=${dateString}&populate=*`, { cache: 'no-store' }))
+    );
+    const allData = await Promise.all(results.map(r => r.json()));
 
-// async function getNewArrivals() {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products?filters[isNewArrival]=true&populate=*`, {
-//     cache: 'no-store',
-//   });
-//   if (!res.ok) throw new Error('Failed to fetch new arrivals');
-//   return res.json();
-// }
+    let products: any[] = [];
+    let categories: any[] = [];
 
-export default function Home() {
-  // When ready to integrate with backend, uncomment:
-  // const categoriesData = await getCategories();
-  // const newArrivalsData = await getNewArrivals();
+    allData.forEach((data, index) => {
+      // Create category entry even if no data for display consistency
+      categories.push({
+        id: index.toString(),
+        name: endpoints[index].label,
+        image: data.data?.[0]?.images?.[0]?.url ? `${apiUrl}${data.data[0].images[0].url}` : endpoints[index].placeholder,
+        link: `/shop?category=${endpoints[index].label}`
+      });
+
+      if (data.data) {
+        const pros = data.data.filter((p: any) => p.featured).map((p: any) => ({
+          id: p.id.toString(),
+          name: p.name,
+          price: p.price,
+          image: p.images?.[0]?.url ? `${apiUrl}${p.images[0].url}` : '',
+          link: `/product/${p.slug || p.id}?type=${endpoints[index].path}`,
+        }));
+        products = [...products, ...pros];
+      }
+    });
+
+    return { products, categories };
+  } catch (error) {
+    console.error('Error fetching aggregated data:', error);
+    return { products: [], categories: [] };
+  }
+}
+
+export default async function Home() {
+  const { products, categories } = await getAggregatedData();
 
   return (
     <main>
       <HeroSection content={heroContent} />
-      <CategoryGrid categories={categories} />
-      <NewArrivals products={newArrivals} />
+      {categories.length > 0 && <CategoryGrid categories={categories} />}
+      {products.length > 0 && <NewArrivals products={products} />}
     </main>
   );
 }
-
