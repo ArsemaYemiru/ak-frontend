@@ -1,115 +1,554 @@
 'use client';
 
-import { useCartStore } from '@/lib/store';
+import { useCartStore, useAuthStore } from '@/lib/store';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Trash2, Plus, Minus, ArrowRight, ShoppingBag } from 'lucide-react';
+import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, Sparkles, Tag, ChevronLeft } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function CartPage() {
     const { items, removeItem, updateQuantity, getTotal } = useCartStore();
+    const { user } = useAuthStore();
+    const router = useRouter();
+
+    const handleCheckout = () => {
+        if (!user) {
+            router.push('/login?redirect=/checkout');
+            return;
+        }
+        router.push('/checkout');
+    };
 
     if (items.length === 0) {
         return (
-            <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center pt-24 px-4 text-center">
-                <div className="bg-[#141414] p-12 rounded-3xl border border-white/5 space-y-6">
-                    <ShoppingBag className="w-16 h-16 text-gray-600 mx-auto" />
-                    <h1 className="text-3xl font-bold text-white">Your cart is empty</h1>
-                    <p className="text-gray-400 max-w-xs mx-auto">Discover our collection and find something beautiful to fill it with.</p>
-                    <Link
-                        href="/shop"
-                        className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition-all"
-                    >
-                        Go to Shop
+            <div className="cart-page relative overflow-hidden">
+                {/* Ambient Background */}
+                <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
+                <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" />
+
+                <div className="empty-cart z-10 relative">
+                    <div className="empty-icon-wrapper">
+                        <ShoppingBag className="empty-icon text-gray-800" size={64} />
+                        <Sparkles className="sparkle-icon text-purple-500" size={24} />
+                    </div>
+                    <h1 className="empty-title">Your Cart is Empty</h1>
+                    <p className="empty-subtitle text-gray-400">
+                        Discover our exquisite collection of handcrafted jewelry and find something beautiful to treasure.
+                    </p>
+                    <Link href="/shop" className="shop-button group relative overflow-hidden">
+                        <div className="relative flex items-center gap-2">
+                            <Sparkles size={20} />
+                            <span>Explore Collection</span>
+                        </div>
                     </Link>
                 </div>
+
+                <style jsx>{`
+                    .cart-page {
+                        background-color: #050505;
+                        min-height: 100vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 2rem;
+                    }
+
+                    .empty-cart {
+                        text-align: center;
+                        max-width: 500px;
+                    }
+
+                    .empty-icon-wrapper {
+                        position: relative;
+                        display: inline-block;
+                        margin-bottom: 2rem;
+                    }
+
+                    .sparkle-icon {
+                        position: absolute;
+                        top: -10px;
+                        right: -10px;
+                        animation: sparkle 3s ease-in-out infinite;
+                    }
+
+                    @keyframes sparkle {
+                        0%, 100% { opacity: 1; transform: rotate(0deg) scale(1); }
+                        50% { opacity: 0.5; transform: rotate(180deg) scale(1.2); }
+                    }
+
+                    .empty-title {
+                        font-family: var(--font-noto-serif-ethiopic), serif;
+                        font-size: 3rem;
+                        font-weight: 800;
+                        margin-bottom: 1rem;
+                        color: #ffffff;
+                    }
+
+                    .empty-subtitle {
+                        font-size: 1.125rem;
+                        line-height: 1.8;
+                        margin-bottom: 2.5rem;
+                    }
+
+                    .shop-button {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        padding: 1rem 2.5rem;
+                        color: #ffffff;
+                        background: #3b82f6;
+                        border: 2px solid #3b82f6;
+                        border-radius: 100px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        font-size: 0.875rem;
+                        transition: all 0.3s ease;
+                    }
+
+                    .shop-button:hover {
+                        background: #2563eb;
+                        border-color: #2563eb;
+                        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+                    }
+
+                    @media (max-width: 640px) {
+                        .empty-title {
+                            font-size: 2rem;
+                        }
+                    }
+                `}</style>
             </div>
         );
     }
 
-    return (
-        <div className="bg-[#0a0a0a] min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-6xl mx-auto">
-                <h1 className="text-4xl font-bold text-white mb-12">Your Shopping Bag</h1>
+    const subtotal = getTotal();
+    const total = subtotal;
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    return (
+        <div className="cart-page relative overflow-hidden">
+            {/* Ambient Background */}
+            <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-blue-900/10 to-transparent pointer-events-none" />
+
+            <div className="container relative z-10">
+                {/* Header */}
+                <div className="page-header">
+                    <button onClick={() => router.back()} className="back-button group">
+                        <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+                        <span>Continue Shopping</span>
+                    </button>
+                    <h1 className="page-title">Shopping Cart</h1>
+                    <p className="page-subtitle text-gray-400">{items.length} {items.length === 1 ? 'item' : 'items'} ready for checkout</p>
+                </div>
+
+                <div className="cart-grid">
                     {/* Cart Items */}
-                    <div className="lg:col-span-2 space-y-6">
+                    <div className="cart-items">
                         {items.map((item) => (
-                            <div key={item.id} className="bg-[#141414] border border-white/5 rounded-2xl p-4 flex gap-6 items-center">
-                                <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-xl overflow-hidden flex-shrink-0">
+                            <div key={item.id} className="cart-item group">
+                                <div className="item-image-wrapper">
                                     <Image
                                         src={item.image}
                                         alt={item.name}
                                         fill
-                                        className="object-cover"
+                                        className="item-image"
                                     />
                                 </div>
 
-                                <div className="flex-1 min-w-0">
-                                    <div className="flex justify-between items-start">
-                                        <h3 className="text-xl font-bold text-white truncate">{item.name}</h3>
+                                <div className="item-details">
+                                    <div className="item-header">
+                                        <div>
+                                            <h3 className="item-name text-white group-hover:text-blue-400 transition-colors">{item.name}</h3>
+                                            <p className="item-price text-gray-400">{item.price.toLocaleString()} Birr</p>
+                                        </div>
                                         <button
                                             onClick={() => removeItem(item.id)}
-                                            className="text-gray-500 hover:text-red-500 transition-colors"
+                                            className="remove-button hover:bg-red-500/10 hover:text-red-500"
+                                            aria-label="Remove item"
                                         >
-                                            <Trash2 className="w-5 h-5" />
+                                            <Trash2 size={18} />
                                         </button>
                                     </div>
-                                    <p className="text-blue-500 font-semibold mt-1">{item.price.toLocaleString()} birr</p>
 
-                                    <div className="flex items-center gap-4 mt-4">
-                                        <div className="flex items-center border border-white/10 rounded-lg">
+                                    <div className="item-footer">
+                                        <div className="quantity-controls">
                                             <button
                                                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                                className="p-2 text-gray-400 hover:text-white"
+                                                className="quantity-button hover:text-white"
+                                                aria-label="Decrease quantity"
                                             >
-                                                <Minus className="w-4 h-4" />
+                                                <Minus size={14} />
                                             </button>
-                                            <span className="w-10 text-center text-white font-medium">{item.quantity}</span>
+                                            <span className="quantity-display">{item.quantity}</span>
                                             <button
                                                 onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                                className="p-2 text-gray-400 hover:text-white"
+                                                className="quantity-button hover:text-white"
+                                                aria-label="Increase quantity"
                                             >
-                                                <Plus className="w-4 h-4" />
+                                                <Plus size={14} />
                                             </button>
                                         </div>
+                                        <p className="item-total text-white">
+                                            {(item.price * item.quantity).toLocaleString()} <span className="text-sm font-normal text-gray-500">Birr</span>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    {/* Summary */}
-                    <div className="lg:col-span-1">
-                        <div className="bg-[#141414] border border-white/5 rounded-2xl p-6 sticky top-24">
-                            <h2 className="text-2xl font-bold text-white mb-6">Order Summary</h2>
+                    {/* Order Summary */}
+                    <div className="summary-wrapper">
+                        <div className="summary-card backdrop-blur-md bg-[#121212]/80 border border-white/[0.08]">
+                            <h2 className="summary-title">Order Summary</h2>
 
-                            <div className="space-y-4 mb-8">
-                                <div className="flex justify-between text-gray-400">
-                                    <span>Subtotal</span>
-                                    <span>{getTotal().toLocaleString()} birr</span>
+                            <div className="summary-details">
+                                <div className="summary-row">
+                                    <span className="summary-label text-gray-400">Subtotal</span>
+                                    <span className="summary-value text-white">{subtotal.toLocaleString()} Birr</span>
                                 </div>
-                                <div className="flex justify-between text-gray-400">
-                                    <span>Delivery</span>
-                                    <span className="text-green-500">Free</span>
-                                </div>
-                                <div className="h-px bg-white/10" />
-                                <div className="flex justify-between text-xl font-bold text-white">
-                                    <span>Total</span>
-                                    <span>{getTotal().toLocaleString()} birr</span>
+                                <div className="summary-row highlight bg-emerald-500/10 border border-emerald-500/20">
+                                    <span className="summary-label text-emerald-400">
+                                        <Tag size={16} />
+                                        Delivery
+                                    </span>
+                                    <span className="summary-value text-emerald-400 font-bold">Free</span>
                                 </div>
                             </div>
 
-                            <Link
-                                href="/checkout"
-                                className="flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all"
+                            <div className="summary-divider bg-white/10"></div>
+
+                            <div className="summary-total">
+                                <span className="total-label text-white">Total</span>
+                                <span className="total-value">{total.toLocaleString()} Birr</span>
+                            </div>
+
+                            <button
+                                onClick={handleCheckout}
+                                className="checkout-button w-full group relative overflow-hidden rounded-xl p-[2px]"
                             >
-                                Checkout <ArrowRight className="w-5 h-5" />
-                            </Link>
+                                <span className="absolute inset-0 bg-blue-500 transition-all duration-300" />
+                                <div className="relative bg-[#0a0a0a] group-hover:bg-[#1a1a1a] transition-colors duration-300 rounded-[10px] py-4 px-6 flex items-center justify-between">
+                                    <span className="font-bold text-white uppercase tracking-wider text-sm">Proceed to Checkout</span>
+                                    <ArrowRight size={20} className="text-white transform group-hover:translate-x-1 transition-transform" />
+                                </div>
+                            </button>
+
+                            <div className="trust-badges mt-6">
+                                <div className="trust-badge">
+                                    <Sparkles size={14} />
+                                    <span>Secure Checkout</span>
+                                </div>
+                                <div className="trust-badge">
+                                    <ShoppingBag size={14} />
+                                    <span>Free Delivery</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <style jsx>{`
+                .cart-page {
+                    background-color: #050505;
+                    min-height: 100vh;
+                    padding: 8rem 2rem 4rem;
+                }
+
+                .container {
+                    max-width: 1400px;
+                    margin: 0 auto;
+                }
+
+                .page-header {
+                    margin-bottom: 3rem;
+                }
+
+                .back-button {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: rgba(255, 255, 255, 0.6);
+                    background: transparent;
+                    border: none;
+                    font-size: 0.875rem;
+                    cursor: pointer;
+                    transition: color 0.3s ease;
+                    margin-bottom: 2rem;
+                }
+
+                .back-button:hover {
+                    color: white;
+                }
+
+                .page-title {
+                    font-family: var(--font-noto-serif-ethiopic), serif;
+                    font-size: 3rem;
+                    font-weight: 800;
+                    margin-bottom: 0.5rem;
+                    letter-spacing: -0.02em;
+                    color: #ffffff;
+                }
+
+                .cart-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 400px;
+                    gap: 3rem;
+                    align-items: start;
+                }
+
+                .cart-items {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+
+                .cart-item {
+                    display: flex;
+                    gap: 1.5rem;
+                    background: rgba(20, 20, 20, 0.6);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border-radius: 20px;
+                    padding: 1.5rem;
+                    transition: all 0.3s ease;
+                }
+
+                .cart-item:hover {
+                    border-color: rgba(255, 255, 255, 0.1);
+                    background: rgba(20, 20, 20, 0.8);
+                }
+
+                .item-image-wrapper {
+                    position: relative;
+                    width: 120px;
+                    height: 120px;
+                    flex-shrink: 0;
+                    border-radius: 16px;
+                    overflow: hidden;
+                    background: #0d0d0d;
+                }
+
+                .item-image-wrapper :global(.item-image) {
+                    object-fit: cover;
+                }
+
+                .item-details {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+
+                .item-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                }
+
+                .item-name {
+                    font-family: var(--font-noto-serif-ethiopic), serif;
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    margin-bottom: 0.25rem;
+                }
+
+                .item-price {
+                    font-weight: 500;
+                    font-size: 0.9375rem;
+                }
+
+                .remove-button {
+                    color: rgba(255, 255, 255, 0.4);
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    padding: 0.5rem;
+                    border-radius: 8px;
+                }
+
+                .item-footer {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .quantity-controls {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.25rem;
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 10px;
+                    padding: 0.25rem;
+                }
+
+                .quantity-button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 28px;
+                    height: 28px;
+                    background: transparent;
+                    border: none;
+                    color: rgba(255, 255, 255, 0.5);
+                    cursor: pointer;
+                    border-radius: 6px;
+                    transition: all 0.2s ease;
+                }
+
+                .quantity-display {
+                    min-width: 32px;
+                    text-align: center;
+                    color: white;
+                    font-weight: 600;
+                    font-size: 0.875rem;
+                }
+
+                .item-total {
+                    font-size: 1rem;
+                    font-weight: 700;
+                }
+
+                .summary-wrapper {
+                    position: sticky;
+                    top: 120px;
+                }
+
+                .summary-card {
+                    border-radius: 24px;
+                    padding: 2rem;
+                }
+
+                .summary-title {
+                    font-family: var(--font-noto-serif-ethiopic), serif;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    color: white;
+                    margin-bottom: 2rem;
+                }
+
+                .summary-details {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .summary-row {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: 0.9375rem;
+                }
+
+                .summary-row.highlight {
+                    padding: 0.75rem 1rem;
+                    border-radius: 12px;
+                }
+
+                .summary-label {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+                .summary-divider {
+                    height: 1px;
+                    margin: 1.5rem 0;
+                }
+
+                .summary-total {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 2rem;
+                }
+
+                .total-label {
+                    font-size: 1.125rem;
+                    font-weight: 700;
+                }
+
+                .total-value {
+                    font-family: var(--font-noto-serif-ethiopic), serif;
+                    font-size: 1.75rem;
+                    font-weight: 800;
+                    color: #d4af37;
+                }
+
+                .checkout-button {
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+
+                .checkout-button:hover {
+                    transform: translateY(-1px);
+                }
+
+                .trust-badges {
+                    display: flex;
+                    gap: 0.75rem;
+                }
+
+                .trust-badge {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    padding: 0.75rem;
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    color: rgba(255, 255, 255, 0.5);
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                }
+
+                @media (max-width: 1024px) {
+                    .cart-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .summary-wrapper {
+                        position: relative;
+                        top: 0;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    .cart-page {
+                        padding: 6rem 1.5rem 3rem;
+                    }
+
+                    .page-title {
+                        font-size: 2rem;
+                    }
+
+                    .cart-item {
+                        flex-direction: column;
+                        gap: 1rem;
+                    }
+
+                    .item-image-wrapper {
+                        width: 100%;
+                        height: 200px;
+                    }
+
+                    .item-footer {
+                        flex-direction: column;
+                        gap: 1rem;
+                        align-items: flex-start;
+                    }
+
+                    .trust-badges {
+                        flex-direction: column;
+                    }
+                }
+            `}</style>
         </div>
     );
 }

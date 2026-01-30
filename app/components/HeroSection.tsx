@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { HeroContent } from '../types';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 interface HeroSectionProps {
   content: HeroContent;
@@ -12,12 +13,28 @@ export default function HeroSection({ content }: HeroSectionProps) {
     <section className="hero">
       <div className="hero-background" style={{ backgroundImage: `url('${content.backgroundImage}')` }} />
       <div className="hero-overlay">
+        {/* Ambient Glows */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none mix-blend-overlay animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none mix-blend-overlay animate-pulse delay-1000" />
+
         <div className="hero-content">
-          <h1 className="hero-title">{content.title}</h1>
+          <div className="hero-badge">
+            <Sparkles size={16} />
+            <span>Premium Collection</span>
+          </div>
+          <h1 className="hero-title">
+            <span className="block">{content.title}</span>
+          </h1>
           <p className="hero-subtitle">{content.subtitle}</p>
-          <Link href={content.ctaLink} className="hero-cta">
-            {content.ctaText}
-          </Link>
+          <div className="cta-wrapper">
+            <Link href={content.ctaLink} className="hero-cta group relative overflow-hidden">
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 group-hover:opacity-90" />
+              <div className="relative flex items-center justify-center gap-2">
+                <span>{content.ctaText}</span>
+                <ArrowRight className="transition-transform group-hover:translate-x-1" size={20} />
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -53,9 +70,9 @@ export default function HeroSection({ content }: HeroSectionProps) {
           inset: 0;
           background: linear-gradient(
               to bottom,
-              rgba(10, 10, 10, 0.4) 0%,
-              rgba(10, 10, 10, 0.6) 50%,
-              rgba(10, 10, 10, 0.9) 100%
+              rgba(5, 5, 5, 0.3) 0%,
+              rgba(5, 5, 5, 0.6) 50%,
+              rgba(5, 5, 5, 0.95) 100%
           );
           display: flex;
           align-items: center;
@@ -68,6 +85,26 @@ export default function HeroSection({ content }: HeroSectionProps) {
           max-width: 1000px;
           padding: 2rem;
           margin-top: 5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
         }
 
         .hero-title {
@@ -79,11 +116,12 @@ export default function HeroSection({ content }: HeroSectionProps) {
           line-height: 1.1;
           letter-spacing: -0.02em;
           text-transform: uppercase;
+          text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .hero-subtitle {
           font-size: 1.25rem;
-          color: rgba(255, 255, 255, 0.7);
+          color: rgba(255, 255, 255, 0.8);
           margin: 0 auto 3rem;
           line-height: 1.8;
           max-width: 700px;
@@ -91,24 +129,21 @@ export default function HeroSection({ content }: HeroSectionProps) {
         }
 
         .hero-cta {
-          display: inline-block;
-          background-color: #3b82f6;
-          color: white;
+          display: inline-flex;
+          align-items: center;
           padding: 1.25rem 3rem;
-          text-decoration: none !important;
+          color: white;
+          border-radius: 100px;
           font-size: 1rem;
           font-weight: 700;
-          border-radius: 12px;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+          box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
         }
 
         .hero-cta:hover {
-          background-color: #2563eb;
           transform: translateY(-4px);
-          box-shadow: 0 20px 40px rgba(59, 130, 246, 0.6);
+          box-shadow: 0 20px 50px rgba(79, 70, 229, 0.5);
         }
 
         @media (max-width: 1024px) {

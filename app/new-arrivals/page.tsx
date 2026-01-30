@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ChevronRight, Loader2, Star } from 'lucide-react';
+import { ChevronRight, Loader2, Star, Sparkles } from 'lucide-react';
 import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
 
@@ -14,6 +14,16 @@ export default function NewArrivalsPage() {
     useEffect(() => {
         const fetchData = async () => {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+
+            const getStrapiURL = (path: string = '') => {
+                return `${apiUrl}${path.startsWith('/') ? path : `/${path}`}`;
+            };
+
+            const getImageUrl = (image: any) => {
+                if (!image) return '/images/placeholder.jpg'; // Add a fallback placeholder if you have one, or empty string
+                if (image.url.startsWith('http')) return image.url;
+                return getStrapiURL(image.url);
+            };
 
             // Calculate 15 days ago for filtering
             const fifteenDaysAgo = new Date();
@@ -38,20 +48,24 @@ export default function NewArrivalsPage() {
 
                 allData.forEach((data, index) => {
                     if (data.data && data.data.length > 0) {
+                        const firstImage = data.data[0]?.images?.[0];
                         mergedCats.push({
                             id: index.toString(),
                             name: endpoints[index].label,
-                            image: data.data[0]?.images?.[0]?.url ? `${apiUrl}${data.data[0].images[0].url}` : '',
+                            image: firstImage ? getImageUrl(firstImage) : '',
                             link: `/shop?category=${endpoints[index].label}`
                         });
 
-                        const pros = data.data.map((p: any) => ({
-                            id: p.id.toString(),
-                            name: p.name,
-                            price: p.price,
-                            image: p.images?.[0]?.url ? `${apiUrl}${p.images[0].url}` : '',
-                            link: `/product/${p.slug || p.id}?type=${endpoints[index].path}`,
-                        }));
+                        const pros = data.data.map((p: any) => {
+                            const prodImage = p.images?.[0];
+                            return {
+                                id: p.id.toString(),
+                                name: p.name,
+                                price: p.price,
+                                image: prodImage ? getImageUrl(prodImage) : '',
+                                link: `/product/${p.slug || p.id}?type=${endpoints[index].path}`,
+                            };
+                        });
                         mergedProducts = [...mergedProducts, ...pros];
                     }
                 });
@@ -69,15 +83,19 @@ export default function NewArrivalsPage() {
     }, []);
 
     return (
-        <div className="new-arrivals-page">
-            <div className="container">
+        <div className="new-arrivals-page relative overflow-hidden">
+            {/* Ambient Background */}
+            <div className="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
+            <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" />
+
+            <div className="container relative z-10">
                 {/* Header Section */}
                 <div className="arrivals-header">
                     <div className="badge">
-                        <Star size={14} className="star-icon" />
+                        <Sparkles size={14} className="star-icon" />
                         <span>Just In</span>
                     </div>
-                    <h1 className="title">New Arrivals</h1>
+                    <h1 className="title bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">New Arrivals</h1>
                     <p className="subtitle">Discover our latest creations, fresh from the workshop and limited in production.</p>
                 </div>
 
@@ -89,11 +107,12 @@ export default function NewArrivalsPage() {
                 </div>
 
                 {/* Product Section */}
-                <div className="products-section">
+                <div className="products-section backdrop-blur-md bg-[#141414]/80 border border-white/[0.08]">
                     <div className="section-header">
                         <h2 className="section-title">Fresh from the Workshop</h2>
-                        <Link href="/shop" className="view-all">
-                            View all items <ChevronRight size={18} />
+                        <Link href="/shop" className="view-all group">
+                            <span>View all items</span>
+                            <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
 
@@ -120,7 +139,7 @@ export default function NewArrivalsPage() {
 
             <style jsx>{`
                 .new-arrivals-page {
-                    background-color: #0a0a0a;
+                    background-color: #050505;
                     min-height: 100vh;
                     padding-top: 160px;
                     padding-bottom: 100px;
@@ -141,7 +160,8 @@ export default function NewArrivalsPage() {
                     display: inline-flex;
                     align-items: center;
                     gap: 0.5rem;
-                    background-color: rgba(59, 130, 246, 0.1);
+                    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+                    border: 1px solid rgba(59, 130, 246, 0.2);
                     color: #3b82f6;
                     padding: 0.5rem 1rem;
                     border-radius: 100px;
@@ -156,10 +176,8 @@ export default function NewArrivalsPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: clamp(3rem, 6vw, 5rem);
                     font-weight: 900;
-                    color: white;
-                    text-transform: uppercase;
-                    letter-spacing: -0.02em;
                     margin-bottom: 1.5rem;
+                    letter-spacing: -0.02em;
                 }
 
                 .subtitle {
@@ -178,10 +196,8 @@ export default function NewArrivalsPage() {
                 }
 
                 .products-section {
-                    background-color: #141414;
                     padding: 4rem;
                     border-radius: 48px;
-                    border: 1px solid rgba(255, 255, 255, 0.05);
                 }
 
                 .section-header {
@@ -204,12 +220,12 @@ export default function NewArrivalsPage() {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
-                    transition: gap 0.3s ease;
                     text-decoration: none !important;
+                    transition: color 0.3s ease;
                 }
 
                 .view-all:hover {
-                    gap: 0.75rem;
+                    color: #60a5fa;
                 }
 
                 .grid {
