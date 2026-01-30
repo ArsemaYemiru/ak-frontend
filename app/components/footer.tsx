@@ -24,10 +24,10 @@ export default function Footer() {
                     <h3 className="column-title">Explore</h3>
                     <ul className="footer-links">
                         <li><Link href="/shop">All Collection</Link></li>
-                        <li><Link href="/shop?category=rings">Rings</Link></li>
-                        <li><Link href="/shop?category=necklace">Necklaces</Link></li>
-                        <li><Link href="/shop?category=bracelets">Bracelets</Link></li>
-                        <li><Link href="/shop?category=earrings">Earrings</Link></li>
+                        <li><Link href="/rings">Rings</Link></li>
+                        <li><Link href="/necklaces">Necklaces</Link></li>
+                        <li><Link href="/bracelets">Bracelets</Link></li>
+                        <li><Link href="/earrings">Earrings</Link></li>
                     </ul>
                 </div>
 

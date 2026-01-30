@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
         pathname: "/uploads/**",
       },
     ],
+    dangerouslyAllowSVG: true,
+    // Allow loading images from localhost in development
+    unoptimized: process.env.NODE_ENV === 'development',
   },
 };
 

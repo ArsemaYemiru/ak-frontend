@@ -13,6 +13,17 @@ const heroContent: HeroContent = {
 
 async function getAggregatedData() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+
+  const getStrapiURL = (path: string = '') => {
+    return `${apiUrl}${path.startsWith('/') ? path : `/${path}`}`;
+  };
+
+  const getImageUrl = (image: any) => {
+    if (!image) return '/images/placeholder.jpg';
+    if (image.url.startsWith('http')) return image.url;
+    return getStrapiURL(image.url);
+  };
+
   const endpoints = [
     { path: 'jeweleries', label: 'Jewelery', placeholder: '/images/hero-background.jpg' },
     { path: 'necklaces', label: 'Necklace', placeholder: '/images/necklace-category.jpg' },
@@ -36,21 +47,25 @@ async function getAggregatedData() {
 
     allData.forEach((data, index) => {
       // Create category entry even if no data for display consistency
+      const firstImage = data.data?.[0]?.images?.[0];
       categories.push({
         id: index.toString(),
         name: endpoints[index].label,
-        image: data.data?.[0]?.images?.[0]?.url ? `${apiUrl}${data.data[0].images[0].url}` : endpoints[index].placeholder,
+        image: firstImage ? getImageUrl(firstImage) : endpoints[index].placeholder,
         link: `/shop?category=${endpoints[index].label}`
       });
 
       if (data.data) {
-        const pros = data.data.filter((p: any) => p.featured).map((p: any) => ({
-          id: p.id.toString(),
-          name: p.name,
-          price: p.price,
-          image: p.images?.[0]?.url ? `${apiUrl}${p.images[0].url}` : '',
-          link: `/product/${p.slug || p.id}?type=${endpoints[index].path}`,
-        }));
+        const pros = data.data.filter((p: any) => p.featured).map((p: any) => {
+          const prodImage = p.images?.[0];
+          return {
+            id: p.id.toString(),
+            name: p.name,
+            price: p.price,
+            image: prodImage ? getImageUrl(prodImage) : '',
+            link: `/product/${p.slug || p.id}?type=${endpoints[index].path}`,
+          };
+        });
         products = [...products, ...pros];
       }
     });

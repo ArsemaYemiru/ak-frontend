@@ -1,0 +1,14 @@
+{
+    "data": {
+        "items": [],
+        "total": 100,
+        "deliveryDetails": {
+            "name": "Test User",
+            "phone": "1234567890",
+            "address": "Test Address",
+            "city": "Addis Ababa"
+        },
+        "status": "Pending",
+        "publishedAt": "2026-01-30T10:28:38.000Z"
+    }
+}

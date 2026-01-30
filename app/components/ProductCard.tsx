@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Check } from 'lucide-react';
 import { Product } from '../types';
 import { useCartStore } from '@/lib/store';
 
@@ -9,11 +9,14 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addItem } = useCartStore();
+  const { items, addItem } = useCartStore();
+  const isInCart = items.some(item => item.id === product.id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (isInCart) return;
+
     addItem({
       id: product.id,
       name: product.name,
@@ -34,19 +37,20 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="product-image"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           />
-          <div className="product-overlay">
-            <button
-              onClick={handleAddToCart}
-              className="cart-btn"
-              aria-label="Add to cart"
-            >
-              <ShoppingCart size={20} />
-            </button>
-          </div>
         </div>
-        <div className="product-info">
-          <h4 className="product-name">{product.name}</h4>
-          <p className="product-price">{product.price.toLocaleString()} birr</p>
+        <div className="product-info-row">
+          <div className="product-text">
+            <h4 className="product-name">{product.name}</h4>
+            <p className="product-price">{product.price.toLocaleString()} birr</p>
+          </div>
+          <button
+            onClick={handleAddToCart}
+            className={`cart-btn ${isInCart ? 'added' : ''}`}
+            disabled={isInCart}
+            aria-label={isInCart ? "In cart" : "Add to cart"}
+          >
+            {isInCart ? <Check size={18} /> : <ShoppingCart size={18} />}
+          </button>
         </div>
       </Link>
 
@@ -89,46 +93,47 @@ export default function ProductCard({ product }: ProductCardProps) {
           transform: scale(1.1);
         }
 
-        .product-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .product-info-row {
             display: flex;
-            align-items: flex-end;
-            justify-content: flex-end;
-            padding: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem;
+            background-color: #141414;
+            gap: 1rem;
         }
 
-        .product-card:hover .product-overlay {
-            opacity: 1;
+        .product-text {
+            flex: 1;
+            min-width: 0;
         }
 
         .cart-btn {
-            background-color: #3b82f6;
-            color: white;
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-            z-index: 10;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
-        .cart-btn:hover {
-            background-color: #2563eb;
-            transform: scale(1.1) rotate(10deg);
+        .cart-btn:not(.added):hover {
+            background-color: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
-        .product-info {
-          padding: 1.5rem;
-          background-color: #141414;
+        .cart-btn.added {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border-color: rgba(16, 185, 129, 0.2);
+            cursor: default;
         }
 
         .product-name {
