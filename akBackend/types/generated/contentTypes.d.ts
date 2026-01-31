@@ -569,41 +569,6 @@ export interface ApiEarringEarring extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiJeweleryJewelery extends Struct.CollectionTypeSchema {
-  collectionName: 'jeweleries';
-  info: {
-    displayName: 'Jewelery';
-    pluralName: 'jeweleries';
-    singularName: 'jewelery';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    images: Schema.Attribute.Media<'images', true>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::jewelery.jewelery'
-    > &
-      Schema.Attribute.Private;
-    material: Schema.Attribute.String;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    price: Schema.Attribute.BigInteger & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
-    stock: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiJewelryJewelry extends Struct.CollectionTypeSchema {
   collectionName: 'jewelries';
   info: {
@@ -1224,7 +1189,6 @@ declare module '@strapi/strapi' {
       'api::bracelet.bracelet': ApiBraceletBracelet;
       'api::category.category': ApiCategoryCategory;
       'api::earring.earring': ApiEarringEarring;
-      'api::jewelery.jewelery': ApiJeweleryJewelery;
       'api::jewelry.jewelry': ApiJewelryJewelry;
       'api::necklace.necklace': ApiNecklaceNecklace;
       'api::order.order': ApiOrderOrder;

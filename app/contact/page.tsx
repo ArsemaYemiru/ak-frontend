@@ -164,6 +164,74 @@ export default function ContactPage() {
                     </div>
                 </div>
             </div>
+
+            <style jsx>{`
+                @media (max-width: 1024px) {
+                    .max-w-7xl {
+                        grid-template-columns: 1fr;
+                        gap: 3rem;
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    h1 {
+                        font-size: 3rem !important;
+                    }
+                    
+                    h2 {
+                        font-size: 2rem !important;
+                        margin-bottom: 2rem !important;
+                    }
+                    
+                    .relative.h-\\[600px\\] {
+                        height: 400px !important;
+                    }
+                    
+                    .bg-\\[\\#141414\\].border {
+                        padding: 2rem !important;
+                    }
+                    
+                    .text-2xl {
+                        font-size: 1.25rem !important;
+                    }
+                    
+                    .space-y-12 {
+                        gap: 2rem !important;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    h1 {
+                        font-size: 2.5rem !important;
+                    }
+                    
+                    .relative.h-\\[600px\\] {
+                        height: 300px !important;
+                        margin-left: 1rem !important;
+                        margin-right: 1rem !important;
+                    }
+                    
+                    .bg-\\[\\#141414\\].border {
+                        padding: 1.5rem !important;
+                        border-radius: 1.5rem !important;
+                    }
+                    
+                    .flex.items-center.gap-6,
+                    .flex.items-start.gap-6 {
+                        flex-direction: column;
+                        align-items: flex-start !important;
+                        gap: 1rem !important;
+                    }
+                    
+                    .text-2xl {
+                        font-size: 1.125rem !important;
+                    }
+                    
+                    button {
+                        width: 100%;
+                    }
+                }
+            `}</style>
         </div>
     );
 }
