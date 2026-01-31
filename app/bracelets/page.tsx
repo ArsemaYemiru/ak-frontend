@@ -137,7 +137,7 @@ export default function BraceletsPage() {
                 .hero-background {
                     position: absolute;
                     inset: 0;
-                    background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+                    background: linear-gradient(135deg, #d4af37 0%, #3b82f6 50%, #d4af37 100%);
                     opacity: 0.15;
                 }
 
@@ -145,7 +145,7 @@ export default function BraceletsPage() {
                     content: '';
                     position: absolute;
                     inset: 0;
-                    background: radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.2) 0%, transparent 50%);
+                    background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.2) 0%, transparent 50%);
                     animation: pulse 8s ease-in-out infinite;
                 }
 
@@ -175,10 +175,10 @@ export default function BraceletsPage() {
                     align-items: center;
                     gap: 0.5rem;
                     padding: 0.75rem 1.5rem;
-                    background: rgba(16, 185, 129, 0.1);
-                    border: 1px solid rgba(16, 185, 129, 0.3);
+                    background: rgba(212, 175, 55, 0.1);
+                    border: 1px solid rgba(212, 175, 55, 0.3);
                     border-radius: 50px;
-                    color: #10b981;
+                    color: #d4af37;
                     font-size: 0.875rem;
                     font-weight: 600;
                     letter-spacing: 0.05em;
@@ -239,12 +239,12 @@ export default function BraceletsPage() {
                 }
 
                 .breadcrumb :global(a) {
-                    color: #10b981;
+                    color: #d4af37;
                     transition: color 0.3s ease;
                 }
 
                 .breadcrumb :global(a:hover) {
-                    color: #059669;
+                    color: #c19b2e;
                 }
 
                 /* Products Section */
@@ -295,7 +295,7 @@ export default function BraceletsPage() {
 
                 .spinner {
                     animation: spin 1s linear infinite;
-                    color: #10b981;
+                    color: #d4af37;
                 }
 
                 @keyframes spin {
@@ -313,7 +313,7 @@ export default function BraceletsPage() {
                 }
 
                 .empty-icon {
-                    color: #10b981;
+                    color: #d4af37;
                     margin-bottom: 2rem;
                     opacity: 0.5;
                 }
@@ -335,7 +335,7 @@ export default function BraceletsPage() {
                 .browse-link {
                     display: inline-block;
                     padding: 1rem 2.5rem;
-                    background: #10b981;
+                    background: #d4af37;
                     color: white;
                     border-radius: 12px;
                     font-weight: 700;
@@ -346,9 +346,9 @@ export default function BraceletsPage() {
                 }
 
                 .browse-link:hover {
-                    background: #059669;
+                    background: #c19b2e;
                     transform: translateY(-2px);
-                    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+                    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
                 }
 
                 /* Responsive */

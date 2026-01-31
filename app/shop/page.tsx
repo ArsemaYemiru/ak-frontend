@@ -72,13 +72,8 @@ export default function ShopPage() {
     });
 
     const getTheme = () => {
-        switch (category) {
-            case 'Necklace': return { color: '#fbbf24', bg: 'rgba(251, 191, 36, 0.1)' };
-            case 'Earring': return { color: '#f472b6', bg: 'rgba(244, 114, 182, 0.1)' };
-            case 'Bracelet': return { color: '#34d399', bg: 'rgba(52, 211, 153, 0.1)' };
-            case 'Rings': return { color: '#a78bfa', bg: 'rgba(167, 139, 250, 0.1)' };
-            default: return { color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.1)' };
-        }
+        // Unified gold/blue theme for all categories
+        return { color: '#d4af37', bg: 'rgba(212, 175, 55, 0.1)' };
     };
 
     const theme = getTheme();

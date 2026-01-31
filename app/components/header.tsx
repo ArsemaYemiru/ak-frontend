@@ -219,7 +219,7 @@ export default function Header() {
                     left: 0;
                     width: 0;
                     height: 2px;
-                    background: #3b82f6;
+                    background: #d4af37;
                     transition: width 0.3s ease;
                 }
 
@@ -305,9 +305,9 @@ export default function Header() {
                 }
 
                 .dropdown-item:hover {
-                    background: rgba(59, 130, 246, 0.1);
-                    border-color: rgba(59, 130, 246, 0.2);
-                    color: #3b82f6;
+                    background: rgba(212, 175, 55, 0.1);
+                    border-color: rgba(212, 175, 55, 0.2);
+                    color: #d4af37;
                     transform: translateX(6px);
                 }
 
@@ -317,7 +317,7 @@ export default function Header() {
                 }
 
                 .dropdown-item:hover .dropdown-item-icon {
-                    color: #3b82f6;
+                    color: #d4af37;
                 }
 
                 .dropdown-item:hover::before {
@@ -344,7 +344,7 @@ export default function Header() {
 
                 .action-btn:hover {
                     transform: translateY(-2px);
-                    color: #3b82f6;
+                    color: #d4af37;
                 }
 
                 .cart-icon-wrapper {
@@ -439,7 +439,7 @@ export default function Header() {
                 }
 
                 .mobile-link:hover {
-                    color: #3b82f6;
+                    color: #d4af37;
                     transform: translateX(8px);
                 }
 
@@ -453,7 +453,7 @@ export default function Header() {
                 }
 
                 .mobile-link-main:hover {
-                    color: #3b82f6;
+                    color: #d4af37;
                 }
 
                 .mobile-divider {
