@@ -125,6 +125,15 @@ export default function CartPage() {
     const subtotal = getTotal();
     const total = subtotal;
 
+    const getFallbackImage = (name: string) => {
+        const n = name.toLowerCase();
+        if (n.includes('necklace')) return '/images/necklace-category.jpg';
+        if (n.includes('earring')) return '/images/earrings-category.jpg';
+        if (n.includes('bracelet')) return '/images/bracelet-category.jpg';
+        if (n.includes('ring')) return '/images/ring-category.jpg';
+        return '/images/ring-category.jpg';
+    };
+
     return (
         <div className="cart-page relative overflow-hidden">
             {/* Ambient Background */}
@@ -148,7 +157,7 @@ export default function CartPage() {
                             <div key={item.id} className="cart-item group">
                                 <div className="item-image-wrapper">
                                     <Image
-                                        src={item.image}
+                                        src={item.image || getFallbackImage(item.name)}
                                         alt={item.name}
                                         fill
                                         className="item-image"
@@ -229,8 +238,8 @@ export default function CartPage() {
                             >
                                 <span className="absolute inset-0 bg-blue-500 transition-all duration-300" />
                                 <div className="relative bg-[#0a0a0a] group-hover:bg-[#1a1a1a] transition-colors duration-300 rounded-[10px] py-4 px-6 flex items-center justify-between">
-                                    <span className="font-bold text-white uppercase tracking-wider text-sm">Proceed to Checkout</span>
-                                    <ArrowRight size={20} className="text-white transform group-hover:translate-x-1 transition-transform" />
+                                    <span className="font-bold text-white uppercase tracking-wider text-sm" style={{ color: 'white' }}>Proceed to Checkout</span>
+                                    <ArrowRight size={20} className="text-white transform group-hover:translate-x-1 transition-transform" style={{ color: 'white' }} />
                                 </div>
                             </button>
 
@@ -332,6 +341,14 @@ export default function CartPage() {
 
                 .item-image-wrapper :global(.item-image) {
                     object-fit: cover;
+                }
+
+                .item-image-placeholder {
+                    width: 100%;
+                    height: 100%;
+                    background-color: #1a1a1a;
+                    background-image: linear-gradient(45deg, #1a1a1a 25%, #262626 25%, #262626 50%, #1a1a1a 50%, #1a1a1a 75%, #262626 75%, #262626 100%);
+                    background-size: 20px 20px;
                 }
 
                 .item-details {

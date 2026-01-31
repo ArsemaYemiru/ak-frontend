@@ -20,10 +20,20 @@ export default function NewArrivalsPage() {
             };
 
             const getImageUrl = (image: any) => {
-                if (!image) return '/images/placeholder.jpg'; // Add a fallback placeholder if you have one, or empty string
+                if (!image) return null; // Return null if no image, we will handle fallback in the map
                 if (image.url.startsWith('http')) return image.url;
                 return getStrapiURL(image.url);
             };
+
+            const getCategoryFallback = (label: string) => {
+                const l = label.toLowerCase();
+                if (l.includes('necklace')) return '/images/necklace-category.jpg';
+                if (l.includes('earring')) return '/images/earrings-category.jpg';
+                if (l.includes('bracelet')) return '/images/bracelet-category.jpg';
+                return '/images/ring-category.jpg';
+            };
+
+            const getProductFallback = (index: number) => `/images/product-${(index % 4) + 1}.jpg`;
 
             // Calculate 15 days ago for filtering
             const fifteenDaysAgo = new Date();
@@ -52,7 +62,7 @@ export default function NewArrivalsPage() {
                         mergedCats.push({
                             id: index.toString(),
                             name: endpoints[index].label,
-                            image: firstImage ? getImageUrl(firstImage) : '',
+                            image: (firstImage ? getImageUrl(firstImage) : null) || getCategoryFallback(endpoints[index].label),
                             link: `/shop?category=${endpoints[index].label}`
                         });
 
@@ -62,7 +72,7 @@ export default function NewArrivalsPage() {
                                 id: p.id.toString(),
                                 name: p.name,
                                 price: p.price,
-                                image: prodImage ? getImageUrl(prodImage) : '',
+                                image: (prodImage ? getImageUrl(prodImage) : null) || getCategoryFallback(endpoints[index].label),
                                 link: `/product/${p.slug || p.id}?type=${endpoints[index].path}`,
                             };
                         });
@@ -70,7 +80,9 @@ export default function NewArrivalsPage() {
                     }
                 });
 
-                setProducts(mergedProducts);
+                // Deduplicate products by ID
+                const uniqueProducts = Array.from(new Map(mergedProducts.map(item => [item.id, item])).values());
+                setProducts(uniqueProducts);
                 setCategories(mergedCats);
             } catch (error) {
                 console.error('Error fetching arrivals:', error);

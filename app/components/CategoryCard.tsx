@@ -12,13 +12,17 @@ export default function CategoryCard({ category }: CategoryCardProps) {
   return (
     <Link href={category.link} className="category-card">
       <div className="category-image-wrapper">
-        <Image
-          src={category.image}
-          alt={category.name}
-          fill
-          className="category-image"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-        />
+        {category.image ? (
+          <Image
+            src={category.image}
+            alt={category.name}
+            fill
+            className="category-image"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          />
+        ) : (
+          <div className="category-image-placeholder" />
+        )}
         <div className="category-overlay">
           <h3 className="category-name">{category.name}</h3>
           <div className="explore-btn">Explore</div>
@@ -48,6 +52,14 @@ export default function CategoryCard({ category }: CategoryCardProps) {
           width: 100%;
           height: 480px;
           background-color: #0d0d0d;
+        }
+
+        .category-image-placeholder {
+          width: 100%;
+          height: 100%;
+          background-color: #1a1a1a;
+          background-image: linear-gradient(45deg, #1a1a1a 25%, #262626 25%, #262626 50%, #1a1a1a 50%, #1a1a1a 75%, #262626 75%, #262626 100%);
+          background-size: 20px 20px;
         }
 
         .category-image-wrapper :global(.category-image) {

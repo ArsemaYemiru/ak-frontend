@@ -30,13 +30,17 @@ export default function ProductCard({ product }: ProductCardProps) {
     <div className="product-card-container">
       <Link href={product.link} className="product-card">
         <div className="product-image-wrapper">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className="product-image"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-          />
+          {product.image ? (
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              className="product-image"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+            />
+          ) : (
+            <div className="product-image-placeholder" />
+          )}
         </div>
         <div className="product-info-row">
           <div className="product-text">
@@ -82,6 +86,14 @@ export default function ProductCard({ product }: ProductCardProps) {
           height: 320px;
           background-color: #0d0d0d;
           overflow: hidden;
+        }
+
+        .product-image-placeholder {
+          width: 100%;
+          height: 100%;
+          background-color: #1a1a1a;
+          background-image: linear-gradient(45deg, #1a1a1a 25%, #262626 25%, #262626 50%, #1a1a1a 50%, #1a1a1a 75%, #262626 75%, #262626 100%);
+          background-size: 20px 20px;
         }
 
         .product-image-wrapper :global(.product-image) {

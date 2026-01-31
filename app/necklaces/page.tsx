@@ -22,11 +22,9 @@ export default function NecklacesPage() {
             };
 
             const getImageUrl = (image: any) => {
-                if (!image) return '/images/placeholder.jpg';
+                if (!image) return null;
                 if (image.url.startsWith('http')) return image.url;
-                const fullUrl = getStrapiURL(image.url);
-                console.log('🖼️ Image URL:', image.url, '→', fullUrl);
-                return fullUrl;
+                return getStrapiURL(image.url);
             };
 
             try {
@@ -40,7 +38,7 @@ export default function NecklacesPage() {
                             id: p.id.toString(),
                             name: p.name,
                             price: p.price,
-                            image: prodImage ? getImageUrl(prodImage) : '',
+                            image: (prodImage ? getImageUrl(prodImage) : null) || '/images/necklace-category.jpg',
                             link: `/product/${p.slug || p.id}?type=necklaces`,
                         };
                     });
