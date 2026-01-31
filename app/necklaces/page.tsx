@@ -139,7 +139,7 @@ export default function NecklacesPage() {
                 .hero-background {
                     position: absolute;
                     inset: 0;
-                    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%);
+                    background: linear-gradient(135deg, #d4af37 0%, #3b82f6 50%, #d4af37 100%);
                     opacity: 0.15;
                 }
 
@@ -147,7 +147,7 @@ export default function NecklacesPage() {
                     content: '';
                     position: absolute;
                     inset: 0;
-                    background: radial-gradient(circle at 70% 50%, rgba(168, 85, 247, 0.2) 0%, transparent 50%);
+                    background: radial-gradient(circle at 70% 50%, rgba(212, 175, 55, 0.2) 0%, transparent 50%);
                     animation: pulse 8s ease-in-out infinite;
                 }
 
@@ -177,10 +177,10 @@ export default function NecklacesPage() {
                     align-items: center;
                     gap: 0.5rem;
                     padding: 0.75rem 1.5rem;
-                    background: rgba(168, 85, 247, 0.1);
-                    border: 1px solid rgba(168, 85, 247, 0.3);
+                    background: rgba(212, 175, 55, 0.1);
+                    border: 1px solid rgba(212, 175, 55, 0.3);
                     border-radius: 50px;
-                    color: #a855f7;
+                    color: #d4af37;
                     font-size: 0.875rem;
                     font-weight: 600;
                     letter-spacing: 0.05em;
@@ -241,12 +241,12 @@ export default function NecklacesPage() {
                 }
 
                 .breadcrumb :global(a) {
-                    color: #a855f7;
+                    color: #d4af37;
                     transition: color 0.3s ease;
                 }
 
                 .breadcrumb :global(a:hover) {
-                    color: #9333ea;
+                    color: #c19b2e;
                 }
 
                 /* Products Section */
@@ -297,7 +297,7 @@ export default function NecklacesPage() {
 
                 .spinner {
                     animation: spin 1s linear infinite;
-                    color: #a855f7;
+                    color: #d4af37;
                 }
 
                 @keyframes spin {
@@ -315,7 +315,7 @@ export default function NecklacesPage() {
                 }
 
                 .empty-icon {
-                    color: #a855f7;
+                    color: #d4af37;
                     margin-bottom: 2rem;
                     opacity: 0.5;
                 }
@@ -337,7 +337,7 @@ export default function NecklacesPage() {
                 .browse-link {
                     display: inline-block;
                     padding: 1rem 2.5rem;
-                    background: #a855f7;
+                    background: #d4af37;
                     color: white;
                     border-radius: 12px;
                     font-weight: 700;
@@ -348,9 +348,9 @@ export default function NecklacesPage() {
                 }
 
                 .browse-link:hover {
-                    background: #9333ea;
+                    background: #c19b2e;
                     transform: translateY(-2px);
-                    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+                    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
                 }
 
                 /* Responsive */

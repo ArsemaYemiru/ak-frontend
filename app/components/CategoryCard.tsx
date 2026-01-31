@@ -44,7 +44,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
 
         .category-card:hover {
           transform: scale(1.02);
-          border-color: rgba(59, 130, 246, 0.3);
+          border-color: rgba(212, 175, 55, 0.3);
         }
 
         .category-image-wrapper {
@@ -101,7 +101,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
             letter-spacing: 0.2em;
             text-transform: uppercase;
             padding: 0.5rem 0;
-            border-bottom: 2px solid #3b82f6;
+            border-bottom: 2px solid #d4af37;
             opacity: 0;
             transform: translateY(10px);
             transition: all 0.3s ease;

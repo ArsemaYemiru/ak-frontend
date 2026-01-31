@@ -5,28 +5,28 @@ import ProductCard from './ProductCard';
 import { Product } from '../types';
 
 interface NewArrivalsProps {
-    products: Product[];
+  products: Product[];
 }
 
 export default function NewArrivals({ products }: NewArrivalsProps) {
-    return (
-        <section className="new-arrivals-section">
-            <div className="section-header">
-                <h2 className="section-title">NEW ARRIVALS</h2>
-                <Link href="/new-arrivals" className="view-all-link">
-                    View All →
-                </Link>
-            </div>
-            <div className="products-grid">
-                {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
-            </div>
+  return (
+    <section className="new-arrivals-section">
+      <div className="section-header">
+        <h2 className="section-title">NEW ARRIVALS</h2>
+        <Link href="/new-arrivals" className="view-all-link">
+          View All →
+        </Link>
+      </div>
+      <div className="products-grid">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
 
-            <style jsx>{`
+      <style jsx>{`
         .new-arrivals-section {
           padding: 5rem 2rem;
-          background-color: #1a1f2e;
+          background-color: #0a0a0a;
         }
 
         .section-header {
@@ -49,13 +49,13 @@ export default function NewArrivals({ products }: NewArrivalsProps) {
         .view-all-link {
           font-family: var(--font-noto-serif-ethiopic), serif;
           font-size: 1rem;
-          color: #3b82f6;
+          color: #d4af37;
           text-decoration: none;
           transition: color 0.2s;
         }
 
         .view-all-link:hover {
-          color: #2563eb;
+          color: #c19b2e;
         }
 
         .products-grid {
@@ -94,6 +94,6 @@ export default function NewArrivals({ products }: NewArrivalsProps) {
           }
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 }

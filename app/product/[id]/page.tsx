@@ -116,8 +116,8 @@ export default function ProductDetailPage() {
                     .spinner {
                         width: 40px;
                         height: 40px;
-                        border: 3px solid rgba(59, 130, 246, 0.2);
-                        border-top-color: #3b82f6;
+                        border: 3px solid rgba(212, 175, 55, 0.2);
+                        border-top-color: #d4af37;
                         border-radius: 50%;
                         animation: spin 1s linear infinite;
                         margin: 0 auto 1rem;
@@ -169,7 +169,7 @@ export default function ProductDetailPage() {
                     .back-link {
                         display: inline-block;
                         padding: 1rem 2rem;
-                        background: #3b82f6;
+                        background: #d4af37;
                         color: white;
                         text-decoration: none;
                         border-radius: 12px;
@@ -178,7 +178,7 @@ export default function ProductDetailPage() {
                     }
 
                     .back-link:hover {
-                        background: #2563eb;
+                        background: #c19b2e;
                         transform: translateY(-2px);
                     }
                 `}</style>
@@ -346,7 +346,7 @@ export default function ProductDetailPage() {
                     align-items: center;
                     gap: 0.5rem;
                     padding: 0.75rem 1.25rem;
-                    background: rgba(59, 130, 246, 0.9);
+                    background: rgba(212, 175, 55, 0.9);
                     backdrop-filter: blur(10px);
                     border-radius: 50px;
                     color: white;
@@ -377,7 +377,7 @@ export default function ProductDetailPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 2rem;
                     font-weight: 700;
-                    color: #3b82f6;
+                    color: #d4af37;
                     margin-bottom: 2rem;
                 }
 
@@ -442,7 +442,7 @@ export default function ProductDetailPage() {
                     gap: 0.75rem;
                     width: 100%;
                     padding: 1.25rem 2rem;
-                    background: #3b82f6;
+                    background: #d4af37;
                     color: white;
                     border: none;
                     border-radius: 16px;
@@ -452,13 +452,13 @@ export default function ProductDetailPage() {
                     letter-spacing: 0.05em;
                     cursor: pointer;
                     transition: all 0.3s ease;
-                    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+                    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
                 }
 
                 .add-to-cart-btn:hover:not(:disabled) {
-                    background: #2563eb;
+                    background: #c19b2e;
                     transform: translateY(-2px);
-                    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+                    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
                 }
 
                 .add-to-cart-btn.added {

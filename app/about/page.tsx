@@ -53,10 +53,6 @@ export default function AboutPage() {
                 </div>
 
                 <div className={`hero-content ${isVisible ? 'visible' : ''}`}>
-                    <div className="hero-badge">
-                        <Sparkles size={16} />
-                        <span>Est. 2024</span>
-                    </div>
                     <h1 className="hero-title">
                         <span className="title-line">Where Heritage</span>
                         <span className="title-line delay-1">Meets Luxury</span>
@@ -150,25 +146,25 @@ export default function AboutPage() {
                                 icon: <History size={28} />,
                                 title: "Heritage",
                                 desc: "Deeply rooted in the ancient artistry and cultural richness of Ethiopia, preserving traditions for future generations.",
-                                color: "#3b82f6"
+                                color: "#d4af37"
                             },
                             {
                                 icon: <Gem size={28} />,
                                 title: "Quality",
                                 desc: "Uncompromising standards using only the finest materials, precious metals, and ethically sourced gemstones.",
-                                color: "#8b5cf6"
+                                color: "#d4af37"
                             },
                             {
                                 icon: <Heart size={28} />,
                                 title: "Passion",
                                 desc: "Every piece is crafted with dedication, love, and meticulous attention to detail that you can feel.",
-                                color: "#ec4899"
+                                color: "#d4af37"
                             },
                             {
                                 icon: <Globe size={28} />,
                                 title: "Integrity",
                                 desc: "Committed to ethical practices, sustainable sourcing, and making a positive impact on our community.",
-                                color: "#10b981"
+                                color: "#d4af37"
                             }
                         ].map((val, i) => (
                             <div key={i} className="value-card" style={{ '--card-color': val.color } as React.CSSProperties}>
@@ -290,7 +286,7 @@ export default function AboutPage() {
                     inset: 0;
                     background: radial-gradient(
                         circle at 50% 50%,
-                        rgba(59, 130, 246, 0.1) 0%,
+                        rgba(212, 175, 55, 0.1) 0%,
                         transparent 70%
                     );
                 }
@@ -311,27 +307,7 @@ export default function AboutPage() {
                     transform: translateY(0);
                 }
 
-                .hero-badge {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    padding: 0.75rem 1.5rem;
-                    background: rgba(59, 130, 246, 0.1);
-                    border: 1px solid rgba(59, 130, 246, 0.3);
-                    border-radius: 50px;
-                    color: #3b82f6;
-                    font-size: 0.875rem;
-                    font-weight: 600;
-                    letter-spacing: 0.05em;
-                    margin-bottom: 2rem;
-                    backdrop-filter: blur(10px);
-                    animation: float 3s ease-in-out infinite;
-                }
 
-                @keyframes float {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(-10px); }
-                }
 
                 .hero-title {
                     font-family: var(--font-noto-serif-ethiopic), serif;
@@ -387,7 +363,7 @@ export default function AboutPage() {
                     background: linear-gradient(
                         to bottom,
                         transparent,
-                        #3b82f6,
+                        #d4af37,
                         transparent
                     );
                     animation: scrollPulse 2s ease-in-out infinite;
@@ -420,10 +396,10 @@ export default function AboutPage() {
                 .section-label {
                     display: inline-block;
                     padding: 0.5rem 1.25rem;
-                    background: rgba(59, 130, 246, 0.1);
-                    border: 1px solid rgba(59, 130, 246, 0.2);
+                    background: rgba(212, 175, 55, 0.1);
+                    border: 1px solid rgba(212, 175, 55, 0.2);
                     border-radius: 50px;
-                    color: #3b82f6;
+                    color: #d4af37;
                     font-size: 0.875rem;
                     font-weight: 600;
                     letter-spacing: 0.1em;
@@ -485,13 +461,13 @@ export default function AboutPage() {
                 }
 
                 .feature-item:hover {
-                    background: rgba(59, 130, 246, 0.05);
-                    border-color: rgba(59, 130, 246, 0.2);
+                    background: rgba(212, 175, 55, 0.05);
+                    border-color: rgba(212, 175, 55, 0.2);
                     transform: translateX(10px);
                 }
 
                 .feature-icon {
-                    color: #3b82f6;
+                    color: #d4af37;
                     flex-shrink: 0;
                 }
 
@@ -522,8 +498,8 @@ export default function AboutPage() {
 
                 .image-card:hover {
                     transform: scale(1.05);
-                    border-color: rgba(59, 130, 246, 0.3);
-                    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+                    border-color: rgba(212, 175, 55, 0.3);
+                    box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
                 }
 
                 .image-card.primary {
@@ -566,7 +542,7 @@ export default function AboutPage() {
                     gap: 0.75rem;
                     padding: 1.25rem 2rem;
                     background: rgba(20, 20, 20, 0.9);
-                    border: 1px solid rgba(59, 130, 246, 0.3);
+                    border: 1px solid rgba(212, 175, 55, 0.3);
                     border-radius: 16px;
                     color: white;
                     font-weight: 600;
@@ -577,7 +553,12 @@ export default function AboutPage() {
                 }
 
                 .floating-badge svg {
-                    color: #3b82f6;
+                    color: #d4af37;
+                }
+                
+                @keyframes float {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-10px); }
                 }
 
                 /* Values Section */
@@ -753,7 +734,7 @@ export default function AboutPage() {
                     background: linear-gradient(
                         to bottom,
                         transparent,
-                        rgba(59, 130, 246, 0.5),
+                        rgba(212, 175, 55, 0.5),
                         transparent
                     );
                 }
@@ -790,7 +771,7 @@ export default function AboutPage() {
                     position: absolute;
                     width: 12px;
                     height: 12px;
-                    background: #3b82f6;
+                    background: #d4af37;
                     border: 3px solid #0a0a0a;
                     border-radius: 50%;
                     left: 50%;
@@ -822,17 +803,17 @@ export default function AboutPage() {
 
                 .timeline-content:hover {
                     background: rgba(20, 20, 20, 0.8);
-                    border-color: rgba(59, 130, 246, 0.3);
+                    border-color: rgba(212, 175, 55, 0.3);
                     transform: translateX(10px);
                 }
 
                 .timeline-year {
                     display: inline-block;
                     padding: 0.5rem 1rem;
-                    background: rgba(59, 130, 246, 0.1);
-                    border: 1px solid rgba(59, 130, 246, 0.3);
+                    background: rgba(212, 175, 55, 0.1);
+                    border: 1px solid rgba(212, 175, 55, 0.3);
                     border-radius: 8px;
-                    color: #3b82f6;
+                    color: #d4af37;
                     font-size: 0.875rem;
                     font-weight: 700;
                     margin-bottom: 1rem;
@@ -872,7 +853,8 @@ export default function AboutPage() {
                     max-width: 1200px;
                     margin: 0 auto;
                     padding: 6rem 4rem;
-                    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+                    background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
+                    border: 1px solid rgba(212, 175, 55, 0.2);
                     border-radius: 32px;
                     overflow: hidden;
                 }
@@ -902,7 +884,7 @@ export default function AboutPage() {
                 .orb-2 {
                     width: 300px;
                     height: 300px;
-                    background: rgba(139, 92, 246, 0.3);
+                    background: rgba(212, 175, 55, 0.3);
                     bottom: -150px;
                     left: -100px;
                     animation-delay: 2s;
@@ -911,7 +893,7 @@ export default function AboutPage() {
                 .orb-3 {
                     width: 250px;
                     height: 250px;
-                    background: rgba(236, 72, 153, 0.2);
+                    background: rgba(212, 175, 55, 0.2);
                     top: 50%;
                     left: 50%;
                     animation-delay: 4s;
@@ -968,8 +950,8 @@ export default function AboutPage() {
                 }
 
                 .cta-button.primary {
-                    background: white;
-                    color: #1e3a8a;
+                    background: #d4af37;
+                    color: #0a0a0a;
                     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
                 }
 

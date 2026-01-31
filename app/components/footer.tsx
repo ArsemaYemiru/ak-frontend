@@ -46,9 +46,9 @@ export default function Footer() {
                 <div className="footer-column">
                     <h3 className="column-title">Contact Us</h3>
                     <ul className="contact-info">
-                        <li><MapPin size={18} className="text-blue-500" /> <span>Addis Ababa, Ethiopia</span></li>
-                        <li><Phone size={18} className="text-blue-500" /> <span>+251 911 000 000</span></li>
-                        <li><Mail size={18} className="text-blue-500" /> <span>info@akjewelry.com</span></li>
+                        <li><MapPin size={18} style={{ color: '#d4af37' }} /> <span>Addis Ababa, Ethiopia</span></li>
+                        <li><Phone size={18} style={{ color: '#d4af37' }} /> <span>+251 911 000 000</span></li>
+                        <li><Mail size={18} style={{ color: '#d4af37' }} /> <span>info@akjewelry.com</span></li>
                     </ul>
                 </div>
             </div>
@@ -99,7 +99,7 @@ export default function Footer() {
                 }
 
                 .social-links a:hover {
-                    color: #3b82f6;
+                    color: #d4af37;
                     transform: translateY(-3px);
                 }
 

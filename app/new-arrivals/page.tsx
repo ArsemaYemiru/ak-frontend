@@ -3,11 +3,9 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronRight, Loader2, Star, Sparkles } from 'lucide-react';
-import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
 
 export default function NewArrivalsPage() {
-    const [categories, setCategories] = useState<any[]>([]);
     const [products, setProducts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -25,13 +23,7 @@ export default function NewArrivalsPage() {
                 return getStrapiURL(image.url);
             };
 
-            const getCategoryFallback = (label: string) => {
-                const l = label.toLowerCase();
-                if (l.includes('necklace')) return '/images/necklace-category.jpg';
-                if (l.includes('earring')) return '/images/earrings-category.jpg';
-                if (l.includes('bracelet')) return '/images/bracelet-category.jpg';
-                return '/images/ring-category.jpg';
-            };
+
 
             const getProductFallback = (index: number) => `/images/product-${(index % 4) + 1}.jpg`;
 
@@ -54,25 +46,16 @@ export default function NewArrivalsPage() {
                 const allData = await Promise.all(results.map(r => r.json()));
 
                 let mergedProducts: any[] = [];
-                let mergedCats: any[] = [];
 
                 allData.forEach((data, index) => {
                     if (data.data && data.data.length > 0) {
-                        const firstImage = data.data[0]?.images?.[0];
-                        mergedCats.push({
-                            id: index.toString(),
-                            name: endpoints[index].label,
-                            image: (firstImage ? getImageUrl(firstImage) : null) || getCategoryFallback(endpoints[index].label),
-                            link: `/shop?category=${endpoints[index].label}`
-                        });
-
                         const pros = data.data.map((p: any) => {
                             const prodImage = p.images?.[0];
                             return {
                                 id: p.id.toString(),
                                 name: p.name,
                                 price: p.price,
-                                image: (prodImage ? getImageUrl(prodImage) : null) || getCategoryFallback(endpoints[index].label),
+                                image: prodImage ? getImageUrl(prodImage) : getProductFallback(index),
                                 link: `/product/${p.slug || p.id}?type=${endpoints[index].path}`,
                             };
                         });
@@ -83,7 +66,6 @@ export default function NewArrivalsPage() {
                 // Deduplicate products by ID
                 const uniqueProducts = Array.from(new Map(mergedProducts.map(item => [item.id, item])).values());
                 setProducts(uniqueProducts);
-                setCategories(mergedCats);
             } catch (error) {
                 console.error('Error fetching arrivals:', error);
             } finally {
@@ -97,26 +79,16 @@ export default function NewArrivalsPage() {
     return (
         <div className="new-arrivals-page relative overflow-hidden">
             {/* Ambient Background */}
-            <div className="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
-            <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" />
+            <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" />
 
             <div className="container relative z-10">
                 {/* Header Section */}
                 <div className="arrivals-header">
-                    <div className="badge">
-                        <Sparkles size={14} className="star-icon" />
-                        <span>Just In</span>
-                    </div>
-                    <h1 className="title bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">New Arrivals</h1>
+                    <h1 className="title">New Arrivals</h1>
                     <p className="subtitle">Discover our latest creations, fresh from the workshop and limited in production.</p>
                 </div>
 
-                {/* Categories Grid */}
-                <div className="categories-grid">
-                    {categories.map((cat) => (
-                        <CategoryCard key={cat.id} category={cat} />
-                    ))}
-                </div>
+
 
                 {/* Product Section */}
                 <div className="products-section backdrop-blur-md bg-[#141414]/80 border border-white/[0.08]">
@@ -154,7 +126,7 @@ export default function NewArrivalsPage() {
                     background-color: #050505;
                     min-height: 100vh;
                     padding-top: 160px;
-                    padding-bottom: 100px;
+                    padding-bottom: 10px;
                 }
 
                 .container {
@@ -165,16 +137,16 @@ export default function NewArrivalsPage() {
 
                 .arrivals-header {
                     text-align: center;
-                    margin-bottom: 6rem;
+                    margin-bottom: 3rem;
                 }
 
                 .badge {
                     display: inline-flex;
                     align-items: center;
                     gap: 0.5rem;
-                    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-                    border: 1px solid rgba(59, 130, 246, 0.2);
-                    color: #3b82f6;
+                    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(59, 130, 246, 0.1));
+                    border: 1px solid rgba(212, 175, 55, 0.2);
+                    color: #d4af37;
                     padding: 0.5rem 1rem;
                     border-radius: 100px;
                     font-size: 0.75rem;
@@ -188,8 +160,9 @@ export default function NewArrivalsPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: clamp(3rem, 6vw, 5rem);
                     font-weight: 900;
-                    margin-bottom: 1.5rem;
+                    margin-bottom: 0.5rem;
                     letter-spacing: -0.02em;
+                    color: white;
                 }
 
                 .subtitle {
@@ -200,12 +173,6 @@ export default function NewArrivalsPage() {
                     line-height: 1.6;
                 }
 
-                .categories-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    gap: 2rem;
-                    margin-bottom: 8rem;
-                }
 
                 .products-section {
                     padding: 4rem;
@@ -227,7 +194,7 @@ export default function NewArrivalsPage() {
                 }
 
                 .view-all {
-                    color: #3b82f6;
+                    color: #d4af37;
                     font-weight: 700;
                     display: flex;
                     align-items: center;
@@ -237,7 +204,7 @@ export default function NewArrivalsPage() {
                 }
 
                 .view-all:hover {
-                    color: #60a5fa;
+                    color: #c19b2e;
                 }
 
                 .grid {
@@ -258,7 +225,7 @@ export default function NewArrivalsPage() {
 
                 .spinner {
                     animation: spin 1s linear infinite;
-                    color: #3b82f6;
+                    color: #d4af37;
                 }
 
                 @keyframes spin {

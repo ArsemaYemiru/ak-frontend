@@ -77,7 +77,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         .product-card:hover {
           transform: translateY(-8px);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-          border-color: rgba(59, 130, 246, 0.3);
+          border-color: rgba(212, 175, 55, 0.3);
         }
 
         .product-image-wrapper {
@@ -120,9 +120,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         }
 
         .cart-btn {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            background-color: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.2);
             width: 40px;
             height: 40px;
             border-radius: 12px;
@@ -135,10 +135,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         }
 
         .cart-btn:not(.added):hover {
-            background-color: #3b82f6;
+            background-color: #d4af37;
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
         }
 
         .cart-btn.added {
@@ -163,7 +163,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           font-family: var(--font-noto-serif-ethiopic), serif;
           font-size: 1rem;
           font-weight: 600;
-          color: #3b82f6;
+          color: #d4af37;
           margin: 0;
         }
 
