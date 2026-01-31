@@ -25,10 +25,10 @@ async function getAggregatedData() {
   };
 
   const endpoints = [
-    { path: 'jeweleries', label: 'Jewelery', placeholder: '/images/hero-background.jpg' },
     { path: 'necklaces', label: 'Necklace', placeholder: '/images/necklace-category.jpg' },
     { path: 'earrings', label: 'Earring', placeholder: '/images/earrings-category.jpg' },
-    { path: 'bracelets', label: 'Bracelet', placeholder: '/images/bracelet-category.jpg' }
+    { path: 'bracelets', label: 'Bracelet', placeholder: '/images/bracelet-category.jpg' },
+    { path: 'rings', label: 'Ring', placeholder: '/images/ring-category.jpg' }
   ];
 
   // Calculate 15 days ago

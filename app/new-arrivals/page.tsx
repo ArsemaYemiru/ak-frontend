@@ -42,10 +42,10 @@ export default function NewArrivalsPage() {
 
             try {
                 const endpoints = [
-                    { path: 'jeweleries', label: 'Jewelery' },
                     { path: 'necklaces', label: 'Necklace' },
                     { path: 'earrings', label: 'Earring' },
-                    { path: 'bracelets', label: 'Bracelet' }
+                    { path: 'bracelets', label: 'Bracelet' },
+                    { path: 'rings', label: 'Ring' }
                 ];
 
                 const results = await Promise.all(

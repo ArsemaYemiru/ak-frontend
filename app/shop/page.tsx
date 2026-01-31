@@ -16,10 +16,10 @@ export default function ShopPage() {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
             try {
                 const endpoints = [
-                    { path: 'jeweleries', label: 'Jewelery' },
                     { path: 'necklaces', label: 'Necklace' },
                     { path: 'earrings', label: 'Earring' },
-                    { path: 'bracelets', label: 'Bracelet' }
+                    { path: 'bracelets', label: 'Bracelet' },
+                    { path: 'rings', label: 'Rings' }
                 ];
 
                 const results = await Promise.all(
@@ -73,11 +73,11 @@ export default function ShopPage() {
 
     const getTheme = () => {
         switch (category) {
-            case 'Necklace': return { color: '#fbbf24', icon: '✨', bg: 'rgba(251, 191, 36, 0.1)' };
-            case 'Earring': return { color: '#f472b6', icon: '💎', bg: 'rgba(244, 114, 182, 0.1)' };
-            case 'Bracelet': return { color: '#34d399', icon: '🌙', bg: 'rgba(52, 211, 153, 0.1)' };
-            case 'Jewelery': return { color: '#60a5fa', icon: '👑', bg: 'rgba(96, 165, 250, 0.1)' };
-            default: return { color: '#3b82f6', icon: '🔍', bg: 'rgba(59, 130, 246, 0.1)' };
+            case 'Necklace': return { color: '#fbbf24', bg: 'rgba(251, 191, 36, 0.1)' };
+            case 'Earring': return { color: '#f472b6', bg: 'rgba(244, 114, 182, 0.1)' };
+            case 'Bracelet': return { color: '#34d399', bg: 'rgba(52, 211, 153, 0.1)' };
+            case 'Rings': return { color: '#a78bfa', bg: 'rgba(167, 139, 250, 0.1)' };
+            default: return { color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.1)' };
         }
     };
 
@@ -86,11 +86,8 @@ export default function ShopPage() {
     return (
         <div className="shop-page" suppressHydrationWarning>
             <div className="shop-container">
-                {/* Header Section with Thematic Icon */}
+                {/* Header Section */}
                 <div className="shop-header">
-                    <div className="theme-icon" style={{ backgroundColor: theme.bg, color: theme.color }}>
-                        {theme.icon}
-                    </div>
                     <h1 className="shop-title" style={{ borderLeft: `4px solid ${theme.color}`, paddingLeft: '1rem' }}>
                         {category === 'All' ? 'Our Collection' : category}
                     </h1>
@@ -161,7 +158,7 @@ export default function ShopPage() {
                 .shop-page {
                     background-color: #0a0a0a;
                     min-height: 100vh;
-                    padding-top: 160px;
+                    padding-top: 80px;
                     padding-bottom: 80px;
                 }
 
@@ -172,7 +169,7 @@ export default function ShopPage() {
                 }
 
                 .shop-header {
-                    margin-bottom: 4rem;
+                    margin-bottom: 1rem;
                     text-align: left;
                 }
 

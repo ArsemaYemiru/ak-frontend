@@ -236,10 +236,10 @@ export default function CartPage() {
                                 onClick={handleCheckout}
                                 className="checkout-button w-full group relative overflow-hidden rounded-xl p-[2px]"
                             >
-                                <span className="absolute inset-0 bg-blue-500 transition-all duration-300" />
-                                <div className="relative bg-[#0a0a0a] group-hover:bg-[#1a1a1a] transition-colors duration-300 rounded-[10px] py-4 px-6 flex items-center justify-between">
+                                <span className="absolute inset-0 bg-[#d4af37] transition-all duration-300" />
+                                <div className="relative bg-[#0a0a0a] group-hover:bg-[#1a1a1a] transition-colors duration-300 rounded-[10px] py-5 px-6 flex items-center justify-between">
                                     <span className="font-bold text-white uppercase tracking-wider text-sm" style={{ color: 'white' }}>Proceed to Checkout</span>
-                                    <ArrowRight size={20} className="text-white transform group-hover:translate-x-1 transition-transform" style={{ color: 'white' }} />
+                                    <ArrowRight size={20} className="text-[#d4af37] transform group-hover:translate-x-1 transition-transform" />
                                 </div>
                             </button>
 

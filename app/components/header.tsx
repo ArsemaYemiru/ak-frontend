@@ -52,7 +52,6 @@ export default function Header() {
 
                 {/* Logo */}
                 <Link href="/" className="logo">
-                    <Sparkles size={20} className="logo-icon" />
                     <span>AK JEWELRY</span>
                 </Link>
 
@@ -415,6 +414,9 @@ export default function Header() {
                 .mobile-section {
                     width: 100%;
                     text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
                 }
 
                 .mobile-section-title {
@@ -433,6 +435,7 @@ export default function Header() {
                     color: rgba(255, 255, 255, 0.7);
                     padding: 0.75rem;
                     transition: all 0.3s ease;
+                    text-decoration: none;
                 }
 
                 .mobile-link:hover {

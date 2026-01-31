@@ -352,6 +352,12 @@ export default function EarringsPage() {
                 }
 
                 /* Responsive */
+                @media (max-width: 1024px) {
+                    .products-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                }
+
                 @media (max-width: 768px) {
                     .hero-section {
                         height: 60vh;
@@ -378,6 +384,39 @@ export default function EarringsPage() {
 
                     .products-section {
                         padding: 0 1.5rem 5rem;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    .hero-section {
+                        height: 50vh;
+                        min-height: 350px;
+                    }
+
+                    .hero-title {
+                        font-size: 2.5rem;
+                    }
+
+                    .hero-subtitle {
+                        font-size: 0.9375rem;
+                        padding: 0 1rem;
+                    }
+
+                    .hero-badge {
+                        font-size: 0.75rem;
+                        padding: 0.5rem 1rem;
+                    }
+
+                    .section-header {
+                        margin-bottom: 2rem;
+                    }
+
+                    .section-title {
+                        font-size: 1.75rem;
+                    }
+
+                    .products-section {
+                        padding: 0 1rem 4rem;
                     }
                 }
             `}</style>
