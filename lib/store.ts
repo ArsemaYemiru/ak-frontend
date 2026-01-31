@@ -5,7 +5,7 @@ interface CartItem {
     id: string;
     name: string;
     price: number;
-    image: string;
+    image: string | null;
     quantity: number;
 }
 
@@ -44,15 +44,19 @@ export const useCartStore = create<CartState>()(
         (set, get) => ({
             items: [],
             addItem: (item) => {
-                const existingItem = get().items.find((i) => i.id === item.id);
+                // Ensure price is a number (handle Strapi BigInt strings)
+                const price = Number(item.price) || 0;
+                const cleanItem = { ...item, price };
+
+                const existingItem = get().items.find((i) => i.id === cleanItem.id);
                 if (existingItem) {
                     set({
                         items: get().items.map((i) =>
-                            i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i
+                            i.id === cleanItem.id ? { ...i, quantity: i.quantity + cleanItem.quantity } : i
                         ),
                     });
                 } else {
-                    set({ items: [...get().items, item] });
+                    set({ items: [...get().items, cleanItem] });
                 }
             },
             removeItem: (id) =>

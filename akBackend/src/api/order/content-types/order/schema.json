@@ -18,7 +18,7 @@
             "type": "decimal",
             "required": true
         },
-        "status": {
+        "orderStatus": {
             "type": "enumeration",
             "enum": [
                 "Pending",

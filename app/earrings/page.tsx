@@ -21,7 +21,7 @@ export default function EarringsPage() {
             };
 
             const getImageUrl = (image: any) => {
-                if (!image) return '/images/placeholder.jpg';
+                if (!image) return null;
                 if (image.url.startsWith('http')) return image.url;
                 return getStrapiURL(image.url);
             };
@@ -37,7 +37,7 @@ export default function EarringsPage() {
                             id: p.id.toString(),
                             name: p.name,
                             price: p.price,
-                            image: prodImage ? getImageUrl(prodImage) : '',
+                            image: (prodImage ? getImageUrl(prodImage) : null) || '/images/earrings-category.jpg',
                             link: `/product/${p.slug || p.id}?type=earrings`,
                         };
                     });

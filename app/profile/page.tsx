@@ -24,7 +24,7 @@ export default function ProfilePage() {
 
         const fetchOrders = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337'}/api/orders?filters[user][id]=${user.id}&populate=*&sort=createdAt:desc`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337'}/api/orders?populate=*&sort=createdAt:desc`, {
                     headers: {
                         'Authorization': `Bearer ${jwt}`
                     }
@@ -46,6 +46,7 @@ export default function ProfilePage() {
     if (!user) return null;
 
     const getStatusColor = (status: string) => {
+        if (!status) return 'bg-gray-500/10 text-gray-400 border-gray-500/20';
         switch (status.toLowerCase()) {
             case 'pending': return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
             case 'confirmed': return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
@@ -165,8 +166,8 @@ export default function ProfilePage() {
                                                 <div className="order-meta">
                                                     <div className="order-id-row">
                                                         <span className="order-id">#{order.id.toString().padStart(6, '0')}</span>
-                                                        <span className={`order-status ${getStatusColor(order.status)}`}>
-                                                            {order.status}
+                                                        <span className={`order-status ${getStatusColor(order.orderStatus)}`}>
+                                                            {order.orderStatus}
                                                         </span>
                                                     </div>
                                                     <div className="order-date">

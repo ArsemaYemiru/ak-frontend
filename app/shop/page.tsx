@@ -28,6 +28,14 @@ export default function ShopPage() {
 
                 const allData = await Promise.all(results.map(r => r.json()));
 
+                const getCategoryFallback = (label: string) => {
+                    const l = label.toLowerCase();
+                    if (l.includes('necklace')) return '/images/necklace-category.jpg';
+                    if (l.includes('earring')) return '/images/earrings-category.jpg';
+                    if (l.includes('bracelet')) return '/images/bracelet-category.jpg';
+                    return '/images/ring-category.jpg';
+                };
+
                 let mergedProducts: any[] = [];
                 allData.forEach((data, index) => {
                     if (data.data) {
@@ -35,7 +43,7 @@ export default function ShopPage() {
                             id: p.id.toString(),
                             name: p.name,
                             price: p.price,
-                            image: p.images?.[0]?.url ? `${apiUrl}${p.images[0].url}` : '',
+                            image: p.images?.[0]?.url ? `${apiUrl}${p.images[0].url}` : getCategoryFallback(endpoints[index].label),
                             link: `/product/${p.slug || p.id}?type=${endpoints[index].path}`,
                             category: endpoints[index].label
                         }));
@@ -43,7 +51,8 @@ export default function ShopPage() {
                     }
                 });
 
-                setProducts(mergedProducts);
+                const uniqueProducts = Array.from(new Map(mergedProducts.map(item => [item.id, item])).values());
+                setProducts(uniqueProducts);
                 setCategories(['All', ...endpoints.map(e => e.label)]);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -75,7 +84,7 @@ export default function ShopPage() {
     const theme = getTheme();
 
     return (
-        <div className="shop-page">
+        <div className="shop-page" suppressHydrationWarning>
             <div className="shop-container">
                 {/* Header Section with Thematic Icon */}
                 <div className="shop-header">

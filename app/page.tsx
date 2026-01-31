@@ -62,7 +62,7 @@ async function getAggregatedData() {
             id: p.id.toString(),
             name: p.name,
             price: p.price,
-            image: prodImage ? getImageUrl(prodImage) : '',
+            image: prodImage ? getImageUrl(prodImage) : endpoints[index].placeholder,
             link: `/product/${p.slug || p.id}?type=${endpoints[index].path}`,
           };
         });
@@ -70,7 +70,10 @@ async function getAggregatedData() {
       }
     });
 
-    return { products, categories };
+    // Deduplicate products by ID
+    const uniqueProducts = Array.from(new Map(products.map(item => [item.id, item])).values());
+
+    return { products: uniqueProducts, categories };
   } catch (error) {
     console.error('Error fetching aggregated data:', error);
     return { products: [], categories: [] };

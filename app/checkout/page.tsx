@@ -41,8 +41,7 @@ export default function CheckoutPage() {
                     items: items,
                     total: getTotal(),
                     deliveryDetails: formData,
-                    user: user?.id,
-                    status: 'Pending',
+                    orderStatus: 'Pending',
                     publishedAt: new Date().toISOString()
                 }
             };
@@ -71,12 +70,26 @@ export default function CheckoutPage() {
         }
     };
 
+    useEffect(() => {
+        if (items.length === 0) {
+            router.push('/shop');
+        }
+    }, [items, router]);
+
     if (items.length === 0) {
-        if (typeof window !== 'undefined') router.push('/shop');
         return null;
     }
 
     const total = getTotal();
+
+    const getFallbackImage = (name: string) => {
+        const n = name.toLowerCase();
+        if (n.includes('necklace')) return '/images/necklace-category.jpg';
+        if (n.includes('earring')) return '/images/earrings-category.jpg';
+        if (n.includes('bracelet')) return '/images/bracelet-category.jpg';
+        if (n.includes('ring')) return '/images/ring-category.jpg';
+        return '/images/ring-category.jpg';
+    };
 
     return (
         <div className="checkout-page relative overflow-hidden">
@@ -219,7 +232,7 @@ export default function CheckoutPage() {
                                     <div key={item.id} className="order-item">
                                         <div className="item-image-wrapper">
                                             <Image
-                                                src={item.image}
+                                                src={item.image || getFallbackImage(item.name)}
                                                 alt={item.name}
                                                 fill
                                                 className="item-image"
@@ -496,6 +509,14 @@ export default function CheckoutPage() {
 
                 .item-image {
                     object-fit: cover;
+                }
+
+                .item-image-placeholder {
+                    width: 100%;
+                    height: 100%;
+                    background-color: #1a1a1a;
+                    background-image: linear-gradient(45deg, #1a1a1a 25%, #262626 25%, #262626 50%, #1a1a1a 50%, #1a1a1a 75%, #262626 75%, #262626 100%);
+                    background-size: 20px 20px;
                 }
 
                 .item-qty-badge {

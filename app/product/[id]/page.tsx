@@ -27,7 +27,7 @@ export default function ProductDetailPage() {
             };
 
             const getImageUrl = (image: any) => {
-                if (!image) return '/images/placeholder.jpg';
+                if (!image) return null;
                 if (image.url.startsWith('http')) return image.url;
                 return getStrapiURL(image.url);
             };
@@ -57,7 +57,12 @@ export default function ProductDetailPage() {
                         price: p.price || 0,
                         description: p.description || 'Handcrafted with precision and care, this piece embodies the rich heritage of Ethiopian craftsmanship.',
                         material: p.material || 'Premium Materials',
-                        image: p.images?.[0] ? getImageUrl(p.images[0]) : '/images/placeholder.jpg',
+                        image: (p.images?.[0] ? getImageUrl(p.images[0]) : null) || (
+                            type.includes('necklace') ? '/images/necklace-category.jpg' :
+                                type.includes('earring') ? '/images/earrings-category.jpg' :
+                                    type.includes('bracelet') ? '/images/bracelet-category.jpg' :
+                                        '/images/ring-category.jpg'
+                        ),
                         type: type,
                     });
                 }
@@ -193,13 +198,17 @@ export default function ProductDetailPage() {
                     {/* Product Image */}
                     <div className="image-section">
                         <div className="image-wrapper">
-                            <Image
-                                src={product.image}
-                                alt={product.name}
-                                fill
-                                className="product-image"
-                                priority
-                            />
+                            {product.image ? (
+                                <Image
+                                    src={product.image}
+                                    alt={product.name}
+                                    fill
+                                    className="product-image"
+                                    priority
+                                />
+                            ) : (
+                                <div className="product-image-placeholder" />
+                            )}
                             <div className="image-badge">
                                 <Sparkles size={16} />
                                 <span>Premium</span>
@@ -319,6 +328,14 @@ export default function ProductDetailPage() {
 
                 .image-wrapper :global(.product-image) {
                     object-fit: cover;
+                }
+
+                .product-image-placeholder {
+                    width: 100%;
+                    height: 100%;
+                    background-color: #1a1a1a;
+                    background-image: linear-gradient(45deg, #1a1a1a 25%, #262626 25%, #262626 50%, #1a1a1a 50%, #1a1a1a 75%, #262626 75%, #262626 100%);
+                    background-size: 20px 20px;
                 }
 
                 .image-badge {
