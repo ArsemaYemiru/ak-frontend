@@ -9,6 +9,7 @@ const heroContent: HeroContent = {
   ctaText: 'Shop new arrivals',
   ctaLink: '/new-arrivals',
   backgroundImage: '/images/hero-background.jpg',
+  backgroundImageLight: '/images/hero-home-light.png',
 };
 
 async function getAggregatedData() {
@@ -52,7 +53,7 @@ async function getAggregatedData() {
         id: index.toString(),
         name: endpoints[index].label,
         image: firstImage ? getImageUrl(firstImage) : endpoints[index].placeholder,
-        link: `/shop?category=${endpoints[index].label}`
+        link: `/${endpoints[index].path}`
       });
 
       if (data.data) {

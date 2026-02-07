@@ -260,9 +260,10 @@ export default function CartPage() {
 
             <style jsx>{`
                 .cart-page {
-                    background-color: #050505;
+                    background-color: var(--background);
                     min-height: 100vh;
                     padding: 8rem 2rem 4rem;
+                    color: var(--foreground);
                 }
 
                 .container {
@@ -278,17 +279,19 @@ export default function CartPage() {
                     display: inline-flex;
                     align-items: center;
                     gap: 0.5rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                     background: transparent;
                     border: none;
                     font-size: 0.875rem;
                     cursor: pointer;
-                    transition: color 0.3s ease;
+                    transition: all 0.3s ease;
                     margin-bottom: 2rem;
                 }
 
                 .back-button:hover {
-                    color: white;
+                    opacity: 1;
+                    color: var(--foreground);
                 }
 
                 .page-title {
@@ -297,7 +300,7 @@ export default function CartPage() {
                     font-weight: 800;
                     margin-bottom: 0.5rem;
                     letter-spacing: -0.02em;
-                    color: #ffffff;
+                    color: var(--foreground);
                 }
 
                 .cart-grid {
@@ -316,17 +319,16 @@ export default function CartPage() {
                 .cart-item {
                     display: flex;
                     gap: 1.5rem;
-                    background: rgba(20, 20, 20, 0.6);
+                    background: var(--dropdown-bg);
                     backdrop-filter: blur(10px);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border: 1px solid var(--dropdown-border);
                     border-radius: 20px;
                     padding: 1.5rem;
                     transition: all 0.3s ease;
                 }
 
                 .cart-item:hover {
-                    border-color: rgba(255, 255, 255, 0.1);
-                    background: rgba(20, 20, 20, 0.8);
+                    border-color: rgba(212, 175, 55, 0.3);
                 }
 
                 .item-image-wrapper {
@@ -336,7 +338,7 @@ export default function CartPage() {
                     flex-shrink: 0;
                     border-radius: 16px;
                     overflow: hidden;
-                    background: #0d0d0d;
+                    background: var(--background);
                 }
 
                 .item-image-wrapper :global(.item-image) {
@@ -369,15 +371,19 @@ export default function CartPage() {
                     font-size: 1.25rem;
                     font-weight: 700;
                     margin-bottom: 0.25rem;
+                    color: var(--foreground);
                 }
 
                 .item-price {
                     font-weight: 500;
                     font-size: 0.9375rem;
+                    color: var(--foreground);
+                    opacity: 0.7;
                 }
 
                 .remove-button {
-                    color: rgba(255, 255, 255, 0.4);
+                    color: var(--foreground);
+                    opacity: 0.4;
                     background: transparent;
                     border: none;
                     cursor: pointer;
@@ -396,8 +402,8 @@ export default function CartPage() {
                     display: flex;
                     align-items: center;
                     gap: 0.25rem;
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    background: var(--background);
+                    border: 1px solid var(--header-border);
                     border-radius: 10px;
                     padding: 0.25rem;
                 }
@@ -410,7 +416,8 @@ export default function CartPage() {
                     height: 28px;
                     background: transparent;
                     border: none;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     cursor: pointer;
                     border-radius: 6px;
                     transition: all 0.2s ease;
@@ -419,7 +426,7 @@ export default function CartPage() {
                 .quantity-display {
                     min-width: 32px;
                     text-align: center;
-                    color: white;
+                    color: var(--foreground);
                     font-weight: 600;
                     font-size: 0.875rem;
                 }
@@ -427,6 +434,7 @@ export default function CartPage() {
                 .item-total {
                     font-size: 1rem;
                     font-weight: 700;
+                    color: var(--foreground);
                 }
 
                 .summary-wrapper {
@@ -437,13 +445,16 @@ export default function CartPage() {
                 .summary-card {
                     border-radius: 24px;
                     padding: 2rem;
+                    background: var(--dropdown-bg);
+                    border: 1px solid var(--dropdown-border);
+                    backdrop-filter: blur(10px);
                 }
 
                 .summary-title {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 1.5rem;
                     font-weight: 700;
-                    color: white;
+                    color: var(--foreground);
                     margin-bottom: 2rem;
                 }
 
@@ -470,11 +481,14 @@ export default function CartPage() {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
+                    color: var(--foreground);
+                    opacity: 0.7;
                 }
 
                 .summary-divider {
                     height: 1px;
                     margin: 1.5rem 0;
+                    background: var(--header-border);
                 }
 
                 .summary-total {
@@ -487,6 +501,7 @@ export default function CartPage() {
                 .total-label {
                     font-size: 1.125rem;
                     font-weight: 700;
+                    color: var(--foreground);
                 }
 
                 .total-value {
@@ -517,10 +532,11 @@ export default function CartPage() {
                     justify-content: center;
                     gap: 0.5rem;
                     padding: 0.75rem;
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    background: var(--background);
+                    border: 1px solid var(--header-border);
                     border-radius: 12px;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     font-size: 0.75rem;
                     font-weight: 600;
                 }

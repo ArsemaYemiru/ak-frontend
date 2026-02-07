@@ -21,4 +21,5 @@ export interface HeroContent {
     ctaText: string;
     ctaLink: string;
     backgroundImage: string;
+    backgroundImageLight?: string;
 }

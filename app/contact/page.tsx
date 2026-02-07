@@ -22,23 +22,23 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="bg-[#0a0a0a] min-h-screen pb-24">
+        <div className="contact-page">
             {/* Hero Section */}
-            <div className="relative h-[600px] mb-24 rounded-3xl overflow-hidden mx-4 sm:mx-8 lg:mx-12 mt-4 border border-white/5">
+            <div className="hero-section">
                 <Image
-                    src="/images/hero-background.jpg" // High-end jewelry background
+                    src="/images/hero-background.jpg"
                     alt="Jewelry Background"
                     fill
-                    className="object-cover opacity-60"
+                    className="hero-image"
                 />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-t from-[#0a0a0a]/80 via-transparent to-transparent">
-                    <h1 className="text-6xl md:text-8xl font-black text-white mb-6 tracking-tighter">Contact Us</h1>
-                    <p className="text-xl text-gray-300 max-w-2xl font-medium leading-relaxed mb-8">
+                <div className="hero-overlay">
+                    <h1 className="hero-title">Contact Us</h1>
+                    <p className="hero-subtitle">
                         Drawing inspiration from Ethiopia's rich culture and artistry, our jewelry is carefully handcrafted to embody elegance, significance, and enduring beauty that lasts beyond a lifetime.
                     </p>
                     <Link
                         href="/new-arrivals"
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition-all"
+                        className="hero-cta"
                     >
                         Shop New Arrivals
                     </Link>
@@ -46,70 +46,60 @@ export default function ContactPage() {
             </div>
 
             {/* Form Section */}
-            <div className="max-w-4xl mx-auto px-4 mb-32">
-                <div className="bg-[#141414] border border-white/10 rounded-[40px] p-12 lg:p-16">
-                    <h2 className="text-4xl font-bold text-white text-center mb-16">
+            <div className="form-container">
+                <div className="form-card">
+                    <h2 className="form-title">
                         We Want To Hear <br /> From You
                     </h2>
 
-                    <form onSubmit={handleSubmit} className="space-y-12">
-                        <div className="space-y-8">
-                            <div>
-                                <label className="block text-lg font-medium text-gray-300 mb-2">Name</label>
-                                <input
-                                    type="text"
-                                    placeholder="Enter Your Full Name"
-                                    className="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                                    value={formData.name}
-                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-lg font-medium text-gray-300 mb-2">Email</label>
-                                <input
-                                    type="email"
-                                    placeholder="Enter Your Email"
-                                    className="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                                    value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-lg font-medium text-gray-300 mb-2">Phone Number</label>
-                                <input
-                                    type="tel"
-                                    placeholder="Enter Your Phone Number"
-                                    className="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                                    value={formData.phone}
-                                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-lg font-medium text-gray-300 mb-2">Company Name</label>
-                                <input
-                                    type="text"
-                                    placeholder="Enter Your Company name"
-                                    className="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                                    value={formData.company}
-                                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-lg font-medium text-gray-300 mb-2">Tell us more</label>
-                                <textarea
-                                    placeholder="Share detail about your needs"
-                                    rows={1}
-                                    className="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors resize-none"
-                                    value={formData.message}
-                                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                />
-                            </div>
+                    <form onSubmit={handleSubmit} className="contact-form">
+                        <div className="form-group">
+                            <label>Name</label>
+                            <input
+                                type="text"
+                                placeholder="Enter Your Full Name"
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                placeholder="Enter Your Email"
+                                value={formData.email}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Phone Number</label>
+                            <input
+                                type="tel"
+                                placeholder="Enter Your Phone Number"
+                                value={formData.phone}
+                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Company Name</label>
+                            <input
+                                type="text"
+                                placeholder="Enter Your Company name"
+                                value={formData.company}
+                                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Tell us more</label>
+                            <textarea
+                                placeholder="Share detail about your needs"
+                                rows={1}
+                                value={formData.message}
+                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                            />
                         </div>
 
-                        <button
-                            type="submit"
-                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-xl transition-all text-lg"
-                        >
+                        <button type="submit" className="submit-button">
                             Submit
                         </button>
                     </form>
@@ -117,27 +107,27 @@ export default function ContactPage() {
             </div>
 
             {/* Info & Map Section */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-                <div>
-                    <h2 className="text-4xl font-bold text-white mb-16">Contact Information</h2>
-                    <div className="space-y-12">
-                        <div className="flex items-center gap-6">
-                            <div className="bg-[#141414] p-4 rounded-2xl border border-white/5">
-                                <Phone className="text-blue-500" size={32} />
+            <div className="info-section">
+                <div className="info-column">
+                    <h2 className="info-title">Contact Information</h2>
+                    <div className="info-list">
+                        <div className="info-item">
+                            <div className="info-icon">
+                                <Phone size={32} />
                             </div>
-                            <span className="text-2xl font-medium text-gray-200">+251 92 729 8999</span>
+                            <span className="info-text">+251 92 729 8999</span>
                         </div>
-                        <div className="flex items-center gap-6">
-                            <div className="bg-[#141414] p-4 rounded-2xl border border-white/5">
-                                <Mail className="text-blue-500" size={32} />
+                        <div className="info-item">
+                            <div className="info-icon">
+                                <Mail size={32} />
                             </div>
-                            <span className="text-2xl font-medium text-gray-200">Danielwxermypls@icloud.com</span>
+                            <span className="info-text">Danielwxermypls@icloud.com</span>
                         </div>
-                        <div className="flex items-start gap-6">
-                            <div className="bg-[#141414] p-4 rounded-2xl border border-white/5 mt-1">
-                                <MapPin className="text-blue-500" size={32} />
+                        <div className="info-item">
+                            <div className="info-icon">
+                                <MapPin size={32} />
                             </div>
-                            <span className="text-2xl font-medium text-gray-200 leading-relaxed">
+                            <span className="info-text address-text">
                                 Africa Avenue / Bole Road <br />
                                 Kirkos <br />
                                 Ethiopia
@@ -146,89 +136,278 @@ export default function ContactPage() {
                     </div>
                 </div>
 
-                <div>
-                    <h2 className="text-4xl font-bold text-white mb-16">Location</h2>
-                    <div className="relative aspect-video rounded-[32px] overflow-hidden border border-white/10 group shadow-2xl">
-                        {/* Mock Map Image - In a real app this would be a Google Map or leaflet component */}
+                <div className="map-column">
+                    <h2 className="info-title">Location</h2>
+                    <div className="map-card">
                         <Image
                             src="/images/map-placeholder.jpg"
                             alt="Store Location Map"
                             fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                            className="map-image"
                         />
-                        <div className="absolute inset-0 bg-[#0a0a0a]/20" />
-                        <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
-                            <p className="text-white font-bold text-lg">Daniel Xe's Location</p>
-                            <p className="text-gray-300 text-sm">Near Dembel City Center</p>
+                        <div className="map-overlay">
+                            <p className="map-location">Daniel Xe's Location</p>
+                            <p className="map-sub">Near Dembel City Center</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <style jsx>{`
+                .contact-page {
+                    background-color: var(--background);
+                    min-height: 100vh;
+                    padding-bottom: 6rem;
+                }
+
+                /* Hero */
+                .hero-section {
+                    position: relative;
+                    height: 600px;
+                    margin: 1rem 3rem 6rem;
+                    border-radius: 1.5rem;
+                    overflow: hidden;
+                    border: 1px solid var(--header-border);
+                }
+
+                .hero-image {
+                    object-fit: cover;
+                    opacity: 0.6;
+                }
+
+                .hero-overlay {
+                    position: absolute;
+                    inset: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    padding: 1.5rem;
+                    background: linear-gradient(to top, var(--background), transparent 80%);
+                }
+
+                .hero-title {
+                    font-size: 5rem;
+                    font-weight: 900;
+                    color: var(--foreground);
+                    margin-bottom: 1.5rem;
+                    line-height: 1;
+                    letter-spacing: -0.02em;
+                }
+
+                .hero-subtitle {
+                    font-size: 1.25rem;
+                    color: var(--foreground);
+                    opacity: 0.8;
+                    max-width: 42rem;
+                    margin-bottom: 2rem;
+                    line-height: 1.6;
+                    font-weight: 500;
+                }
+
+                .hero-cta {
+                    background: #3b82f6;
+                    color: white;
+                    font-weight: 700;
+                    padding: 0.75rem 2rem;
+                    border-radius: 0.75rem;
+                    transition: all 0.3s ease;
+                }
+
+                .hero-cta:hover {
+                    background: #2563eb;
+                    transform: translateY(-2px);
+                }
+
+                /* Form */
+                .form-container {
+                    max-width: 56rem;
+                    margin: 0 auto 8rem;
+                    padding: 0 1rem;
+                }
+
+                .form-card {
+                    background: var(--dropdown-bg);
+                    border: 1px solid var(--header-border);
+                    border-radius: 2.5rem;
+                    padding: 4rem;
+                }
+
+                .form-title {
+                    font-size: 2.5rem;
+                    font-weight: 700;
+                    color: var(--foreground);
+                    text-align: center;
+                    margin-bottom: 4rem;
+                    line-height: 1.2;
+                }
+
+                .contact-form {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3rem;
+                }
+
+                .form-group label {
+                    display: block;
+                    font-size: 1.125rem;
+                    font-weight: 500;
+                    color: var(--foreground);
+                    opacity: 0.8;
+                    margin-bottom: 0.5rem;
+                }
+
+                .form-group input,
+                .form-group textarea {
+                    width: 100%;
+                    background: transparent;
+                    border: none;
+                    border-bottom: 1px solid var(--header-border);
+                    padding: 0.75rem 0;
+                    color: var(--foreground);
+                    font-size: 1rem;
+                    outline: none;
+                    transition: border-color 0.3s ease;
+                    resize: none;
+                }
+
+                .form-group input:focus,
+                .form-group textarea:focus {
+                    border-bottom-color: #3b82f6;
+                }
+
+                .submit-button {
+                    background: #3b82f6;
+                    color: white;
+                    font-weight: 700;
+                    padding: 1rem 3rem;
+                    border-radius: 0.75rem;
+                    font-size: 1.125rem;
+                    transition: all 0.3s ease;
+                    border: none;
+                    cursor: pointer;
+                    align-self: flex-start;
+                    width: 100%;
+                }
+
+                .submit-button:hover {
+                    background: #2563eb;
+                    transform: translateY(-2px);
+                }
+
+                /* Info Section */
+                .info-section {
+                    max-width: 80rem;
+                    margin: 0 auto;
+                    padding: 0 2rem;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 6rem;
+                    align-items: start;
+                }
+
+                .info-title {
+                    font-size: 2.25rem;
+                    font-weight: 700;
+                    color: var(--foreground);
+                    margin-bottom: 4rem;
+                }
+
+                .info-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3rem;
+                }
+
+                .info-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+                }
+
+                .info-icon {
+                    background: var(--dropdown-bg);
+                    padding: 1rem;
+                    border-radius: 1rem;
+                    border: 1px solid var(--header-border);
+                    color: #3b82f6;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .info-text {
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                    color: var(--foreground);
+                }
+
+                .address-text {
+                    line-height: 1.6;
+                }
+
+                /* Map */
+                .map-card {
+                    position: relative;
+                    aspect-ratio: 16/9;
+                    border-radius: 2rem;
+                    overflow: hidden;
+                    border: 1px solid var(--header-border);
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                }
+
+                .map-image {
+                    object-fit: cover;
+                    transition: transform 1s ease;
+                }
+
+                .map-card:hover .map-image {
+                    transform: scale(1.05);
+                }
+
+                .map-overlay {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    padding: 2rem;
+                    background: linear-gradient(to top, var(--background), transparent);
+                }
+
+                .map-location {
+                    color: var(--foreground);
+                    font-weight: 700;
+                    font-size: 1.125rem;
+                }
+
+                .map-sub {
+                    color: var(--foreground);
+                    opacity: 0.7;
+                    font-size: 0.875rem;
+                }
+
+                /* Responsive */
                 @media (max-width: 1024px) {
-                    .max-w-7xl {
+                    .info-section {
                         grid-template-columns: 1fr;
                         gap: 3rem;
                     }
                 }
 
                 @media (max-width: 768px) {
-                    h1 {
-                        font-size: 3rem !important;
+                    .hero-section {
+                        margin: 1rem;
+                        height: 400px;
                     }
-                    
-                    h2 {
-                        font-size: 2rem !important;
-                        margin-bottom: 2rem !important;
+                    .hero-title {
+                        font-size: 3rem;
                     }
-                    
-                    .relative.h-\\[600px\\] {
-                        height: 400px !important;
+                    .form-card {
+                        padding: 2rem;
                     }
-                    
-                    .bg-\\[\\#141414\\].border {
-                        padding: 2rem !important;
-                    }
-                    
-                    .text-2xl {
-                        font-size: 1.25rem !important;
-                    }
-                    
-                    .space-y-12 {
-                        gap: 2rem !important;
-                    }
-                }
-
-                @media (max-width: 640px) {
-                    h1 {
-                        font-size: 2.5rem !important;
-                    }
-                    
-                    .relative.h-\\[600px\\] {
-                        height: 300px !important;
-                        margin-left: 1rem !important;
-                        margin-right: 1rem !important;
-                    }
-                    
-                    .bg-\\[\\#141414\\].border {
-                        padding: 1.5rem !important;
-                        border-radius: 1.5rem !important;
-                    }
-                    
-                    .flex.items-center.gap-6,
-                    .flex.items-start.gap-6 {
-                        flex-direction: column;
-                        align-items: flex-start !important;
-                        gap: 1rem !important;
-                    }
-                    
-                    .text-2xl {
-                        font-size: 1.125rem !important;
-                    }
-                    
-                    button {
-                        width: 100%;
+                    .info-text {
+                        font-size: 1.125rem;
                     }
                 }
             `}</style>

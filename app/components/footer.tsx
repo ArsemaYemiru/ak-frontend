@@ -59,10 +59,10 @@ export default function Footer() {
 
             <style jsx>{`
                 .footer {
-                    background-color: #0d0d0d;
-                    color: white;
+                    background-color: var(--dropdown-bg);
+                    color: var(--foreground);
                     padding: 6rem 2rem 2rem;
-                    border-top: 1px solid rgba(255, 255, 255, 0.05);
+                    border-top: 1px solid var(--header-border);
                 }
 
                 .footer-container {
@@ -78,10 +78,12 @@ export default function Footer() {
                     font-weight: 800;
                     letter-spacing: 0.1em;
                     margin-bottom: 1.5rem;
+                    color: var(--foreground);
                 }
 
                 .brand-tagline {
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                     font-size: 0.9375rem;
                     line-height: 1.8;
                     margin-bottom: 2rem;
@@ -94,12 +96,14 @@ export default function Footer() {
                 }
 
                 .social-links a {
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     transition: all 0.3s ease;
                 }
 
                 .social-links a:hover {
                     color: #d4af37;
+                    opacity: 1;
                     transform: translateY(-3px);
                 }
 
@@ -109,7 +113,7 @@ export default function Footer() {
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
                     margin-bottom: 2rem;
-                    color: white;
+                    color: var(--foreground);
                 }
 
                 .footer-links, .contact-info {
@@ -122,13 +126,15 @@ export default function Footer() {
                 }
 
                 .footer-links :global(a) {
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     font-size: 0.9375rem;
                     transition: all 0.3s ease;
                 }
 
                 .footer-links :global(a:hover) {
-                    color: white;
+                    color: var(--foreground);
+                    opacity: 1;
                     padding-left: 4px;
                 }
 
@@ -136,7 +142,8 @@ export default function Footer() {
                     display: flex;
                     gap: 1rem;
                     align-items: center;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     font-size: 0.9375rem;
                 }
 
@@ -144,9 +151,10 @@ export default function Footer() {
                     max-width: 1400px;
                     margin: 4rem auto 0;
                     padding-top: 2rem;
-                    border-top: 1px solid rgba(255, 255, 255, 0.05);
+                    border-top: 1px solid var(--header-border);
                     text-align: center;
-                    color: rgba(255, 255, 255, 0.3);
+                    color: var(--foreground);
+                    opacity: 0.3;
                     font-size: 0.8125rem;
                 }
 

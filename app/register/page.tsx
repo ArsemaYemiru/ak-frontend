@@ -177,7 +177,7 @@ export default function RegisterPage() {
 
             <style jsx>{`
                 .auth-page {
-                    background-color: #000000;
+                    background-color: var(--background);
                     min-height: 100vh;
                 }
 
@@ -190,14 +190,14 @@ export default function RegisterPage() {
                     align-items: center;
                     justify-content: center;
                     overflow: hidden;
-                    background: #000000;
+                    background: var(--background);
                     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
                 }
 
                 .hero-background {
                     position: absolute;
                     inset: 0;
-                    background: #000000;
+                    background: var(--background);
                 }
 
                 .hero-background::before {
@@ -231,7 +231,7 @@ export default function RegisterPage() {
                     background: rgba(59, 130, 246, 0.1);
                     border: 1px solid rgba(59, 130, 246, 0.3);
                     border-radius: 50px;
-                    color: #3b82f6;
+                    color: var(--primary);
                     font-size: 0.875rem;
                     font-weight: 600;
                     letter-spacing: 0.05em;
@@ -242,7 +242,7 @@ export default function RegisterPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 4rem;
                     font-weight: 900;
-                    color: #ffffff;
+                    color: var(--foreground);
                     margin: 0 0 1.5rem 0;
                     line-height: 1.1;
                     letter-spacing: -0.03em;
@@ -272,7 +272,8 @@ export default function RegisterPage() {
 
                 .hero-subtitle {
                     font-size: 1.125rem;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     max-width: 600px;
                     margin: 0 auto 2rem;
                     line-height: 1.8;
@@ -283,15 +284,16 @@ export default function RegisterPage() {
                     align-items: center;
                     gap: 0.75rem;
                     padding: 0.75rem 1.5rem;
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--dropdown-bg);
+                    border: 1px solid var(--dropdown-border);
                     border-radius: 50px;
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                 }
 
                 .breadcrumb :global(a) {
-                    color: #3b82f6;
+                    color: var(--primary);
                     transition: color 0.3s ease;
                 }
 
@@ -303,7 +305,7 @@ export default function RegisterPage() {
                 .form-section {
                     padding: 4rem 2rem 8rem;
                     position: relative;
-                    background: #000000;
+                    background: var(--background);
                 }
 
                 .form-container {
@@ -312,7 +314,7 @@ export default function RegisterPage() {
                 }
 
                 .form-card {
-                    background: #0a0a0a;
+                    background: var(--dropdown-bg);
                     border: 1px solid rgba(212, 175, 55, 0.2);
                     border-radius: 24px;
                     padding: 3rem;
@@ -379,8 +381,9 @@ export default function RegisterPage() {
                     align-items: center;
                     justify-content: center;
                     pointer-events: none;
-                    color: rgba(255, 255, 255, 0.3);
-                    transition: color 0.3s ease;
+                    color: var(--foreground);
+                    opacity: 0.3;
+                    transition: all 0.3s ease;
                 }
 
                 .input-container:focus-within .input-icon {
@@ -391,10 +394,10 @@ export default function RegisterPage() {
                     display: block;
                     width: 100%;
                     padding: 1rem 1.25rem 1rem 3.25rem;
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--background);
+                    border: 1px solid var(--header-border);
                     border-radius: 12px;
-                    color: white;
+                    color: var(--foreground);
                     font-size: 0.9375rem;
                     line-height: 1.5;
                     transition: all 0.3s ease;
@@ -402,21 +405,22 @@ export default function RegisterPage() {
                 }
 
                 .input-field::placeholder {
-                    color: rgba(255, 255, 255, 0.3);
+                    color: var(--foreground);
+                    opacity: 0.3;
                 }
 
                 .input-field:focus {
                     outline: none;
                     border-color: #d4af37;
-                    background: rgba(255, 255, 255, 0.05);
+                    background: var(--dropdown-bg);
                 }
 
                 .submit-button {
                     width: 100%;
                     position: relative;
                     border-radius: 12px;
-                    border: 2px solid #3b82f6;
-                    background: #3b82f6;
+                    border: 2px solid var(--primary);
+                    background: var(--primary);
                     cursor: pointer;
                     transition: all 0.3s ease;
                     padding: 0;
@@ -428,8 +432,7 @@ export default function RegisterPage() {
                 }
 
                 .submit-button:hover:not(:disabled) {
-                    background: #2563eb;
-                    border-color: #2563eb;
+                    opacity: 0.9;
                     box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
                 }
 
@@ -475,13 +478,14 @@ export default function RegisterPage() {
 
                 .form-footer {
                     padding-top: 1.5rem;
-                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                    border-top: 1px solid var(--header-border);
                     text-align: center;
                 }
 
                 .footer-text {
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                 }
 
                 .footer-link {
@@ -494,7 +498,7 @@ export default function RegisterPage() {
                 }
 
                 .footer-link:hover {
-                    color: #3b82f6;
+                    color: var(--primary);
                 }
 
                 .link-arrow {

@@ -5,7 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { History, Heart, Gem, Globe, Sparkles, Award, Users, TrendingUp } from 'lucide-react';
 
+import { useTheme } from '../context/ThemeContext';
+
 export default function AboutPage() {
+    const { theme } = useTheme();
     const [isVisible, setIsVisible] = useState(false);
     const heroRef = useRef<HTMLDivElement>(null);
     const statsRef = useRef<HTMLDivElement>(null);
@@ -36,15 +39,18 @@ export default function AboutPage() {
         return () => observer.disconnect();
     }, []);
 
+    const heroImage = theme === 'light' ? '/images/hero-about-light.png' : '/images/hero-background.jpg';
+
     return (
         <div className="about-page">
             {/* Hero Section with Parallax */}
             <section className="hero-section" ref={heroRef}>
                 <div className="hero-background">
                     <Image
-                        src="/images/hero-background.jpg"
+                        src={heroImage}
                         alt="AK Jewelry Craftsmanship"
                         fill
+                        quality={100}
                         className="hero-image"
                         priority
                     />
@@ -239,7 +245,7 @@ export default function AboutPage() {
 
             <style jsx>{`
                 .about-page {
-                    background-color: #0a0a0a;
+                    background-color: var(--background);
                     min-height: 100vh;
                     overflow-x: hidden;
                 }
@@ -277,7 +283,7 @@ export default function AboutPage() {
                         to bottom,
                         rgba(10, 10, 10, 0.3) 0%,
                         rgba(10, 10, 10, 0.7) 50%,
-                        rgba(10, 10, 10, 0.95) 100%
+                        var(--background) 100%
                     );
                 }
 
@@ -313,7 +319,7 @@ export default function AboutPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 5.5rem;
                     font-weight: 900;
-                    color: white;
+                    color: white; 
                     margin: 0 0 2rem 0;
                     line-height: 1.1;
                     letter-spacing: -0.03em;
@@ -377,7 +383,7 @@ export default function AboutPage() {
                 /* Story Section */
                 .story-section {
                     padding: 10rem 2rem;
-                    background: linear-gradient(to bottom, #0a0a0a 0%, #0f0f0f 100%);
+                    background: var(--background);
                     opacity: 0;
                     transform: translateY(50px);
                     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
@@ -411,7 +417,7 @@ export default function AboutPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 3.5rem;
                     font-weight: 800;
-                    color: white;
+                    color: var(--foreground);
                     margin-bottom: 1.5rem;
                     line-height: 1.2;
                     letter-spacing: -0.02em;
@@ -438,7 +444,8 @@ export default function AboutPage() {
                 .story-text p {
                     font-size: 1.125rem;
                     line-height: 1.9;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     margin: 0;
                 }
 
@@ -454,8 +461,8 @@ export default function AboutPage() {
                     align-items: center;
                     gap: 1.25rem;
                     padding: 1.5rem;
-                    background: rgba(20, 20, 20, 0.5);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    background: var(--dropdown-bg);
+                    border: 1px solid var(--dropdown-border);
                     border-radius: 16px;
                     transition: all 0.3s ease;
                 }
@@ -474,13 +481,14 @@ export default function AboutPage() {
                 .feature-title {
                     font-size: 1.125rem;
                     font-weight: 700;
-                    color: white;
+                    color: var(--foreground);
                     margin-bottom: 0.25rem;
                 }
 
                 .feature-desc {
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                 }
 
                 .story-images {
@@ -492,7 +500,7 @@ export default function AboutPage() {
                     position: absolute;
                     border-radius: 24px;
                     overflow: hidden;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border: 1px solid var(--header-border);
                     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
                 }
 
@@ -541,10 +549,10 @@ export default function AboutPage() {
                     align-items: center;
                     gap: 0.75rem;
                     padding: 1.25rem 2rem;
-                    background: rgba(20, 20, 20, 0.9);
+                    background: var(--dropdown-bg);
                     border: 1px solid rgba(212, 175, 55, 0.3);
                     border-radius: 16px;
-                    color: white;
+                    color: var(--foreground);
                     font-weight: 600;
                     backdrop-filter: blur(20px);
                     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
@@ -564,7 +572,7 @@ export default function AboutPage() {
                 /* Values Section */
                 .values-section {
                     padding: 10rem 2rem;
-                    background: #0a0a0a;
+                    background: var(--background);
                     opacity: 0;
                     transform: translateY(50px);
                     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
@@ -582,7 +590,8 @@ export default function AboutPage() {
 
                 .section-description {
                     font-size: 1.25rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                     max-width: 600px;
                     margin: 0 auto;
                 }
@@ -596,8 +605,8 @@ export default function AboutPage() {
                 .value-card {
                     position: relative;
                     padding: 3rem 2rem;
-                    background: rgba(20, 20, 20, 0.5);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    background: var(--dropdown-bg);
+                    border: 1px solid var(--dropdown-border);
                     border-radius: 24px;
                     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                     overflow: hidden;
@@ -617,8 +626,8 @@ export default function AboutPage() {
                 }
 
                 .value-card:hover {
-                    background: rgba(20, 20, 20, 0.8);
-                    border-color: rgba(255, 255, 255, 0.1);
+                    background: var(--dropdown-bg);
+                    border-color: var(--dropdown-border);
                     transform: translateY(-10px);
                 }
 
@@ -640,8 +649,8 @@ export default function AboutPage() {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: rgba(10, 10, 10, 0.8);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--dropdown-bg);
+                    border: 1px solid var(--dropdown-border);
                     border-radius: 20px;
                     color: var(--card-color);
                     transition: all 0.4s ease;
@@ -672,14 +681,15 @@ export default function AboutPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 1.5rem;
                     font-weight: 700;
-                    color: white;
+                    color: var(--foreground);
                     margin-bottom: 1rem;
                 }
 
                 .value-desc {
                     font-size: 1rem;
                     line-height: 1.7;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                     margin: 0;
                 }
 
@@ -706,7 +716,7 @@ export default function AboutPage() {
                 /* Timeline Section */
                 .timeline-section {
                     padding: 10rem 2rem;
-                    background: linear-gradient(to bottom, #0a0a0a 0%, #0f0f0f 100%);
+                    background: var(--background);
                     opacity: 0;
                     transform: translateY(50px);
                     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
@@ -772,7 +782,7 @@ export default function AboutPage() {
                     width: 12px;
                     height: 12px;
                     background: #d4af37;
-                    border: 3px solid #0a0a0a;
+                    border: 3px solid var(--background);
                     border-radius: 50%;
                     left: 50%;
                     transform: translateX(-50%);
@@ -795,8 +805,8 @@ export default function AboutPage() {
 
                 .timeline-content {
                     padding: 2rem;
-                    background: rgba(20, 20, 20, 0.5);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    background: var(--dropdown-bg);
+                    border: 1px solid var(--dropdown-border);
                     border-radius: 20px;
                     transition: all 0.3s ease;
                 }
@@ -837,7 +847,7 @@ export default function AboutPage() {
                 /* CTA Section */
                 .cta-section {
                     padding: 10rem 2rem;
-                    background: #0a0a0a;
+                    background: var(--background);
                     opacity: 0;
                     transform: translateY(50px);
                     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
@@ -853,7 +863,7 @@ export default function AboutPage() {
                     max-width: 1200px;
                     margin: 0 auto;
                     padding: 6rem 4rem;
-                    background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
+                    background: var(--dropdown-bg);
                     border: 1px solid rgba(212, 175, 55, 0.2);
                     border-radius: 32px;
                     overflow: hidden;
@@ -876,7 +886,8 @@ export default function AboutPage() {
                 .orb-1 {
                     width: 400px;
                     height: 400px;
-                    background: rgba(255, 255, 255, 0.2);
+                    background: var(--foreground);
+                    opacity: 0.1;
                     top: -200px;
                     right: -100px;
                 }
@@ -915,7 +926,7 @@ export default function AboutPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 4rem;
                     font-weight: 900;
-                    color: white;
+                    color: var(--foreground);
                     margin-bottom: 1.5rem;
                     line-height: 1.2;
                     letter-spacing: -0.02em;
@@ -923,7 +934,8 @@ export default function AboutPage() {
 
                 .cta-subtitle {
                     font-size: 1.375rem;
-                    color: rgba(255, 255, 255, 0.9);
+                    color: var(--foreground);
+                    opacity: 0.9;
                     max-width: 700px;
                     margin: 0 auto 3rem;
                     line-height: 1.7;
@@ -951,7 +963,7 @@ export default function AboutPage() {
 
                 .cta-button.primary {
                     background: #d4af37;
-                    color: #0a0a0a;
+                    color: #000000;
                     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
                 }
 
@@ -981,13 +993,14 @@ export default function AboutPage() {
 
                 .cta-button.secondary {
                     background: transparent;
-                    color: white;
-                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    color: var(--foreground);
+                    border: 2px solid var(--header-border);
                 }
 
                 .cta-button.secondary:hover {
-                    background: rgba(255, 255, 255, 0.1);
-                    border-color: white;
+                    background: var(--foreground);
+                    color: var(--background);
+                    border-color: var(--foreground);
                     transform: translateY(-4px);
                 }
 
