@@ -38,18 +38,16 @@
       "type": "boolean",
       "default": false
     },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
     "images": {
       "type": "media",
       "multiple": true,
       "allowedTypes": [
         "images"
       ]
-    },
-    "category": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "jewelries"
     }
   }
 }

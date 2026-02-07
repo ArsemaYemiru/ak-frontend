@@ -32,6 +32,7 @@ export default function Header() {
         { name: 'Necklaces', href: '/necklaces', icon: Crown },
         { name: 'Bracelets', href: '/bracelets', icon: Zap },
         { name: 'Earrings', href: '/earrings', icon: Sparkles },
+        { name: 'Accessories', href: '/accessories', icon: Gem },
     ];
 
     const handleNavigation = (href: string) => {

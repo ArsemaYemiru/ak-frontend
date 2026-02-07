@@ -1,10 +1,10 @@
 {
     "kind": "collectionType",
-    "collectionName": "necklaces",
+    "collectionName": "rings",
     "info": {
-        "singularName": "necklace",
-        "pluralName": "necklaces",
-        "displayName": "Necklace"
+        "singularName": "ring",
+        "pluralName": "rings",
+        "displayName": "Ring"
     },
     "options": {
         "draftAndPublish": true

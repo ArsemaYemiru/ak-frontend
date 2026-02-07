@@ -19,11 +19,12 @@ export default function ShopPage() {
                     { path: 'necklaces', label: 'Necklace' },
                     { path: 'earrings', label: 'Earring' },
                     { path: 'bracelets', label: 'Bracelet' },
-                    { path: 'rings', label: 'Rings' }
+                    { path: 'rings', label: 'Rings' },
+                    { path: 'jewelries', label: 'Accessories' }
                 ];
 
                 const results = await Promise.all(
-                    endpoints.map(e => fetch(`${apiUrl}/api/${e.path}?populate=*`))
+                    endpoints.map(e => fetch(`${apiUrl}/api/${e.path}?filters[isActive][$ne]=false&populate=*`))
                 );
 
                 const allData = await Promise.all(results.map(r => r.json()));
@@ -33,7 +34,9 @@ export default function ShopPage() {
                     if (l.includes('necklace')) return '/images/necklace-category.jpg';
                     if (l.includes('earring')) return '/images/earrings-category.jpg';
                     if (l.includes('bracelet')) return '/images/bracelet-category.jpg';
-                    return '/images/ring-category.jpg';
+                    if (l.includes('ring')) return '/images/ring-category.jpg';
+                    if (l.includes('ring')) return '/images/ring-category.jpg';
+                    return '/images/accessories.jpg';
                 };
 
                 let mergedProducts: any[] = [];

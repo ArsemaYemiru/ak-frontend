@@ -37,11 +37,12 @@ export default function NewArrivalsPage() {
                     { path: 'necklaces', label: 'Necklace' },
                     { path: 'earrings', label: 'Earring' },
                     { path: 'bracelets', label: 'Bracelet' },
-                    { path: 'rings', label: 'Ring' }
+                    { path: 'rings', label: 'Ring' },
+                    { path: 'jewelries', label: 'Accessories' }
                 ];
 
                 const results = await Promise.all(
-                    endpoints.map(e => fetch(`${apiUrl}/api/${e.path}?filters[createdAt][$gte]=${dateString}&populate=*`))
+                    endpoints.map(e => fetch(`${apiUrl}/api/${e.path}?filters[createdAt][$gte]=${dateString}&filters[isActive][$ne]=false&populate=*`))
                 );
                 const allData = await Promise.all(results.map(r => r.json()));
 
