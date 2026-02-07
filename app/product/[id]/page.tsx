@@ -20,7 +20,7 @@ export default function ProductDetailPage() {
     useEffect(() => {
         const fetchProduct = async () => {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
-            const type = searchParams.get('type') || 'jeweleries';
+            const type = searchParams.get('type') || 'jewelries';
 
             const getStrapiURL = (path: string = '') => {
                 return `${apiUrl}${path.startsWith('/') ? path : `/${path}`}`;
@@ -61,7 +61,8 @@ export default function ProductDetailPage() {
                             type.includes('necklace') ? '/images/necklace-category.jpg' :
                                 type.includes('earring') ? '/images/earrings-category.jpg' :
                                     type.includes('bracelet') ? '/images/bracelet-category.jpg' :
-                                        '/images/ring-category.jpg'
+                                        type.includes('jewelries') ? '/images/accessories.jpg' :
+                                            '/images/ring-category.jpg'
                         ),
                         type: type,
                     });

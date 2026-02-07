@@ -27,7 +27,7 @@ export default function BraceletsPage() {
             };
 
             try {
-                const response = await fetch(`${apiUrl}/api/bracelets?populate=*`);
+                const response = await fetch(`${apiUrl}/api/bracelets?filters[isActive][$ne]=false&populate=*`);
                 const data = await response.json();
 
                 if (data.data) {

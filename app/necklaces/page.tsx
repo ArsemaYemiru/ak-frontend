@@ -28,7 +28,7 @@ export default function NecklacesPage() {
             };
 
             try {
-                const response = await fetch(`${apiUrl}/api/necklaces?populate=*`);
+                const response = await fetch(`${apiUrl}/api/necklaces?filters[isActive][$ne]=false&populate=*`);
                 const data = await response.json();
 
                 if (data.data) {

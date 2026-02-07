@@ -27,7 +27,7 @@ export default function RingsPage() {
             };
 
             try {
-                const response = await fetch(`${apiUrl}/api/jeweleries?populate=*`);
+                const response = await fetch(`${apiUrl}/api/rings?filters[isActive][$ne]=false&populate=*`);
                 const data = await response.json();
 
                 if (data.data) {
@@ -38,7 +38,7 @@ export default function RingsPage() {
                             name: p.name,
                             price: p.price,
                             image: (prodImage ? getImageUrl(prodImage) : null) || '/images/ring-category.jpg',
-                            link: `/product/${p.slug || p.id}?type=jeweleries`,
+                            link: `/product/${p.slug || p.id}?type=rings`,
                         };
                     });
                     setProducts(formattedProducts);

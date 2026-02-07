@@ -29,7 +29,8 @@ async function getAggregatedData() {
     { path: 'necklaces', label: 'Necklace', placeholder: '/images/necklace-category.jpg' },
     { path: 'earrings', label: 'Earring', placeholder: '/images/earrings-category.jpg' },
     { path: 'bracelets', label: 'Bracelet', placeholder: '/images/bracelet-category.jpg' },
-    { path: 'rings', label: 'Ring', placeholder: '/images/ring-category.jpg' }
+    { path: 'rings', label: 'Ring', placeholder: '/images/ring-category.jpg' },
+
   ];
 
   // Calculate 15 days ago
@@ -39,7 +40,7 @@ async function getAggregatedData() {
 
   try {
     const results = await Promise.all(
-      endpoints.map(e => fetch(`${apiUrl}/api/${e.path}?filters[createdAt][$gte]=${dateString}&populate=*`, { cache: 'no-store' }))
+      endpoints.map(e => fetch(`${apiUrl}/api/${e.path}?filters[featured][$eq]=true&filters[isActive][$ne]=false&populate=*`, { cache: 'no-store' }))
     );
     const allData = await Promise.all(results.map(r => r.json()));
 
@@ -57,7 +58,7 @@ async function getAggregatedData() {
       });
 
       if (data.data) {
-        const pros = data.data.filter((p: any) => p.featured).map((p: any) => {
+        const pros = data.data.map((p: any) => {
           const prodImage = p.images?.[0];
           return {
             id: p.id.toString(),

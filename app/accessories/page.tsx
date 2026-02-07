@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ChevronRight, Loader2, Sparkles } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 
-export default function EarringsPage() {
+export default function AccessoriesPage() {
     const [products, setProducts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
@@ -27,7 +27,8 @@ export default function EarringsPage() {
             };
 
             try {
-                const response = await fetch(`${apiUrl}/api/earrings?filters[isActive][$ne]=false&populate=*`);
+                // Fetch from 'jewelries' endpoint which is now purposed for Accessories
+                const response = await fetch(`${apiUrl}/api/jewelries?filters[isActive][$ne]=false&populate=*`);
                 const data = await response.json();
 
                 if (data.data) {
@@ -37,14 +38,14 @@ export default function EarringsPage() {
                             id: p.id.toString(),
                             name: p.name,
                             price: p.price,
-                            image: (prodImage ? getImageUrl(prodImage) : null) || '/images/earrings-category.jpg',
-                            link: `/product/${p.slug || p.id}?type=earrings`,
+                            image: (prodImage ? getImageUrl(prodImage) : null) || '/images/accessories.jpg',
+                            link: `/product/${p.slug || p.id}?type=jewelries`,
                         };
                     });
                     setProducts(formattedProducts);
                 }
             } catch (error) {
-                console.error('Error fetching earrings:', error);
+                console.error('Error fetching accessories:', error);
             } finally {
                 setLoading(false);
             }
@@ -64,16 +65,16 @@ export default function EarringsPage() {
                         <span>Premium Collection</span>
                     </div>
                     <h1 className="hero-title">
-                        <span className="title-line">Radiant</span>
-                        <span className="title-line delay-1">Earrings</span>
+                        <span className="title-line">Timeless</span>
+                        <span className="title-line delay-1">Accessories</span>
                     </h1>
                     <p className="hero-subtitle">
-                        Illuminate your beauty with our handcrafted earrings, where Ethiopian artistry meets contemporary design
+                        Discover our exclusive range of handcrafted accessories, from elegant hairpins to traditional beadwork
                     </p>
                     <div className="breadcrumb">
                         <Link href="/">Home</Link>
                         <ChevronRight size={16} />
-                        <span>Earrings</span>
+                        <span>Accessories</span>
                     </div>
                 </div>
             </section>
@@ -83,9 +84,9 @@ export default function EarringsPage() {
                 <div className="container">
                     <div className="section-header">
                         <div>
-                            <h2 className="section-title">Our Earring Collection</h2>
+                            <h2 className="section-title">Verified Accessories</h2>
                             <p className="section-subtitle">
-                                {loading ? 'Loading...' : `${products.length} exquisite pieces`}
+                                {loading ? 'Loading...' : `${products.length} unique items`}
                             </p>
                         </div>
                     </div>
@@ -94,7 +95,7 @@ export default function EarringsPage() {
                         {loading ? (
                             <div className="loading-state">
                                 <Loader2 className="spinner" size={40} />
-                                <p>Curating the finest pieces...</p>
+                                <p>Curating the collection...</p>
                             </div>
                         ) : products.length > 0 ? (
                             <div className="products-grid">
@@ -105,8 +106,8 @@ export default function EarringsPage() {
                         ) : (
                             <div className="empty-state">
                                 <Sparkles size={48} className="empty-icon" />
-                                <h3>New Treasures Coming Soon</h3>
-                                <p>Our artisans are crafting new masterpieces. Check back shortly!</p>
+                                <h3>New Collections Arriving Soon</h3>
+                                <p>Our artisans are busy crafting new accessories for you.</p>
                                 <Link href="/shop" className="browse-link">
                                     Browse All Collections
                                 </Link>
