@@ -35,11 +35,11 @@ export default function CategoryCard({ category }: CategoryCardProps) {
           text-decoration: none !important;
           border-radius: 20px;
           overflow: hidden;
-          background-color: #141414;
+          background-color: var(--dropdown-bg);
           transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           cursor: pointer;
           position: relative;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid var(--dropdown-border);
         }
 
         .category-card:hover {
@@ -51,7 +51,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
           position: relative;
           width: 100%;
           height: 480px;
-          background-color: #0d0d0d;
+          background-color: var(--background);
         }
 
         .category-image-placeholder {

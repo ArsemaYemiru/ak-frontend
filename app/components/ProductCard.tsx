@@ -68,8 +68,8 @@ export default function ProductCard({ product }: ProductCardProps) {
           text-decoration: none !important;
           border-radius: 16px;
           overflow: hidden;
-          background-color: #141414;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background-color: var(--dropdown-bg);
+          border: 1px solid var(--dropdown-border);
           transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
           cursor: pointer;
         }
@@ -84,7 +84,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           position: relative;
           width: 100%;
           height: 320px;
-          background-color: #0d0d0d;
+          background-color: var(--background);
           overflow: hidden;
         }
 
@@ -110,7 +110,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             justify-content: space-between;
             align-items: center;
             padding: 1.25rem;
-            background-color: #141414;
+            background-color: var(--dropdown-bg);
             gap: 1rem;
         }
 
@@ -152,7 +152,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           font-family: var(--font-noto-serif-ethiopic), serif;
           font-size: 1.125rem;
           font-weight: 500;
-          color: white;
+          color: var(--foreground);
           margin: 0 0 0.5rem 0;
           white-space: nowrap;
           overflow: hidden;

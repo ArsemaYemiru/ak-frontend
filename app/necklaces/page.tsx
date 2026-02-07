@@ -120,7 +120,7 @@ export default function NecklacesPage() {
 
             <style jsx>{`
                 .category-page {
-                    background-color: #0a0a0a;
+                    background-color: var(--background);
                     min-height: 100vh;
                 }
 
@@ -192,7 +192,7 @@ export default function NecklacesPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 5rem;
                     font-weight: 900;
-                    color: white;
+                    color: var(--foreground);
                     margin: 0 0 1.5rem 0;
                     line-height: 1.1;
                     letter-spacing: -0.03em;
@@ -221,7 +221,8 @@ export default function NecklacesPage() {
 
                 .hero-subtitle {
                     font-size: 1.25rem;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     max-width: 600px;
                     margin: 0 auto 2rem;
                     line-height: 1.8;
@@ -232,12 +233,13 @@ export default function NecklacesPage() {
                     align-items: center;
                     gap: 0.75rem;
                     padding: 0.75rem 1.5rem;
-                    background: rgba(20, 20, 20, 0.6);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    background: var(--dropdown-bg);
+                    border: 1px solid var(--dropdown-border);
                     border-radius: 50px;
                     backdrop-filter: blur(20px);
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                 }
 
                 .breadcrumb :global(a) {
@@ -270,12 +272,13 @@ export default function NecklacesPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 2.5rem;
                     font-weight: 800;
-                    color: white;
+                    color: var(--foreground);
                     margin-bottom: 0.5rem;
                 }
 
                 .section-subtitle {
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     font-size: 1rem;
                 }
 
@@ -291,7 +294,8 @@ export default function NecklacesPage() {
                     align-items: center;
                     justify-content: center;
                     padding: 100px 0;
-                    color: rgba(255, 255, 255, 0.4);
+                    color: var(--foreground);
+                    opacity: 0.4;
                     gap: 1.5rem;
                 }
 
@@ -323,12 +327,13 @@ export default function NecklacesPage() {
                 .empty-state h3 {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 2rem;
-                    color: white;
+                    color: var(--foreground);
                     margin-bottom: 1rem;
                 }
 
                 .empty-state p {
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     font-size: 1.125rem;
                     margin-bottom: 2rem;
                     max-width: 500px;

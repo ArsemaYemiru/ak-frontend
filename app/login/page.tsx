@@ -160,7 +160,7 @@ function LoginForm() {
 
             <style jsx>{`
                 .auth-page {
-                    background-color: #000000;
+                    background-color: var(--background);
                     min-height: 100vh;
                 }
 
@@ -173,14 +173,14 @@ function LoginForm() {
                     align-items: center;
                     justify-content: center;
                     overflow: hidden;
-                    background: #000000;
+                    background: var(--background);
                     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
                 }
 
                 .hero-background {
                     position: absolute;
                     inset: 0;
-                    background: #000000;
+                    background: var(--background);
                 }
 
                 .hero-background::before {
@@ -225,7 +225,7 @@ function LoginForm() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 4rem;
                     font-weight: 900;
-                    color: #ffffff;
+                    color: var(--foreground);
                     margin: 0 0 1.5rem 0;
                     line-height: 1.1;
                     letter-spacing: -0.03em;
@@ -255,7 +255,8 @@ function LoginForm() {
 
                 .hero-subtitle {
                     font-size: 1.125rem;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     max-width: 600px;
                     margin: 0 auto 2rem;
                     line-height: 1.8;
@@ -266,11 +267,12 @@ function LoginForm() {
                     align-items: center;
                     gap: 0.75rem;
                     padding: 0.75rem 1.5rem;
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--dropdown-bg);
+                    border: 1px solid var(--dropdown-border);
                     border-radius: 50px;
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                 }
 
                 .breadcrumb :global(a) {
@@ -286,7 +288,7 @@ function LoginForm() {
                 .form-section {
                     padding: 4rem 2rem 8rem;
                     position: relative;
-                    background: #000000;
+                    background: var(--background);
                 }
 
                 .form-container {
@@ -295,7 +297,7 @@ function LoginForm() {
                 }
 
                 .form-card {
-                    background: #0a0a0a;
+                    background: var(--dropdown-bg);
                     border: 1px solid rgba(212, 175, 55, 0.2);
                     border-radius: 24px;
                     padding: 3rem;
@@ -362,22 +364,24 @@ function LoginForm() {
                     align-items: center;
                     justify-content: center;
                     pointer-events: none;
-                    color: rgba(255, 255, 255, 0.3);
-                    transition: color 0.3s ease;
+                    color: var(--foreground);
+                    opacity: 0.3;
+                    transition: all 0.3s ease;
                 }
 
                 .input-container:focus-within .input-icon {
                     color: #d4af37;
+                    opacity: 1;
                 }
 
                 .input-field {
                     display: block;
                     width: 100%;
                     padding: 1rem 1.25rem 1rem 3.25rem;
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--background);
+                    border: 1px solid var(--header-border);
                     border-radius: 12px;
-                    color: white;
+                    color: var(--foreground);
                     font-size: 0.9375rem;
                     line-height: 1.5;
                     transition: all 0.3s ease;
@@ -385,13 +389,14 @@ function LoginForm() {
                 }
 
                 .input-field::placeholder {
-                    color: rgba(255, 255, 255, 0.3);
+                    color: var(--foreground);
+                    opacity: 0.3;
                 }
 
                 .input-field:focus {
                     outline: none;
                     border-color: #d4af37;
-                    background: rgba(255, 255, 255, 0.05);
+                    background: var(--dropdown-bg);
                 }
 
                 .submit-button {
@@ -458,13 +463,14 @@ function LoginForm() {
 
                 .form-footer {
                     padding-top: 1.5rem;
-                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                    border-top: 1px solid var(--header-border);
                     text-align: center;
                 }
 
                 .footer-text {
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                 }
 
                 .footer-link {

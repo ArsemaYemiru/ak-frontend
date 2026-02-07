@@ -40,7 +40,18 @@ export default function ProfilePage() {
             }
         };
 
+        // Initial fetch
         fetchOrders();
+
+        // Set up polling to refresh orders every 30 seconds
+        const pollInterval = setInterval(() => {
+            fetchOrders();
+        }, 30000); // 30 seconds
+
+        // Cleanup interval on unmount
+        return () => {
+            clearInterval(pollInterval);
+        };
     }, [user, jwt, router]);
 
     if (!user) return null;
@@ -214,7 +225,7 @@ export default function ProfilePage() {
 
             <style jsx>{`
                 .profile-page {
-                    background-color: #000000;
+                    background-color: var(--background);
                     min-height: 100vh;
                 }
 
@@ -227,14 +238,14 @@ export default function ProfilePage() {
                     align-items: center;
                     justify-content: center;
                     overflow: hidden;
-                    background: #000000;
+                    background: var(--background);
                     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
                 }
 
                 .hero-background {
                     position: absolute;
                     inset: 0;
-                    background: #000000;
+                    background: var(--background);
                 }
 
                 .hero-background::before {
@@ -279,7 +290,7 @@ export default function ProfilePage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 4rem;
                     font-weight: 900;
-                    color: #ffffff;
+                    color: var(--foreground);
                     margin: 0 0 1.5rem 0;
                     line-height: 1.1;
                     letter-spacing: -0.03em;
@@ -309,7 +320,8 @@ export default function ProfilePage() {
 
                 .hero-subtitle {
                     font-size: 1.125rem;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     max-width: 600px;
                     margin: 0 auto 2rem;
                     line-height: 1.8;
@@ -325,11 +337,12 @@ export default function ProfilePage() {
                     align-items: center;
                     gap: 0.75rem;
                     padding: 0.75rem 1.5rem;
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--dropdown-bg);
+                    border: 1px solid var(--dropdown-border);
                     border-radius: 50px;
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                 }
 
                 .breadcrumb :global(a) {
@@ -345,7 +358,7 @@ export default function ProfilePage() {
                 .content-section {
                     padding: 4rem 2rem 8rem;
                     position: relative;
-                    background: #000000;
+                    background: var(--background);
                 }
 
                 .container {
@@ -367,7 +380,7 @@ export default function ProfilePage() {
                 }
 
                 .profile-card {
-                    background: #0a0a0a;
+                    background: var(--dropdown-bg);
                     border: 1px solid rgba(212, 175, 55, 0.2);
                     border-radius: 24px;
                     padding: 2rem;
@@ -390,7 +403,7 @@ export default function ProfilePage() {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: #ffffff;
+                    color: white;
                 }
 
                 .profile-info {
@@ -400,18 +413,19 @@ export default function ProfilePage() {
                 .profile-name {
                     font-size: 1.25rem;
                     font-weight: 700;
-                    color: #ffffff;
+                    color: var(--foreground);
                     margin-bottom: 0.25rem;
                 }
 
                 .profile-email {
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                 }
 
                 .divider {
                     height: 1px;
-                    background: rgba(255, 255, 255, 0.1);
+                    background: var(--header-border);
                 }
 
                 .stats-grid {
@@ -428,13 +442,14 @@ export default function ProfilePage() {
 
                 .stat-label {
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                 }
 
                 .stat-value {
                     font-size: 0.9375rem;
                     font-weight: 600;
-                    color: #ffffff;
+                    color: var(--foreground);
                 }
 
                 .status-active {
@@ -460,7 +475,8 @@ export default function ProfilePage() {
                     background: rgba(255, 255, 255, 0.03);
                     border: 1px solid rgba(255, 255, 255, 0.1);
                     border-radius: 12px;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     font-size: 0.9375rem;
                     font-weight: 600;
                     cursor: pointer;
@@ -470,7 +486,8 @@ export default function ProfilePage() {
                 .logout-button:hover {
                     background: rgba(255, 255, 255, 0.08);
                     border-color: rgba(255, 255, 255, 0.2);
-                    color: #ffffff;
+                    opacity: 1;
+                    color: var(--foreground);
                 }
 
                 /* Main Content */
@@ -501,7 +518,7 @@ export default function ProfilePage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 1.75rem;
                     font-weight: 800;
-                    color: #ffffff;
+                    color: var(--foreground);
                 }
 
                 .loading-state {
@@ -530,7 +547,7 @@ export default function ProfilePage() {
                     justify-content: center;
                     padding: 5rem 2rem;
                     text-align: center;
-                    background: #0a0a0a;
+                    background: var(--dropdown-bg);
                     border: 1px solid rgba(212, 175, 55, 0.2);
                     border-radius: 24px;
                 }
@@ -551,12 +568,13 @@ export default function ProfilePage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 1.5rem;
                     font-weight: 700;
-                    color: #ffffff;
+                    color: var(--foreground);
                     margin-bottom: 0.75rem;
                 }
 
                 .empty-description {
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     font-size: 1rem;
                     max-width: 500px;
                     margin-bottom: 2rem;
@@ -592,7 +610,7 @@ export default function ProfilePage() {
                 }
 
                 .order-card {
-                    background: #0a0a0a;
+                    background: var(--dropdown-bg);
                     border: 1px solid rgba(212, 175, 55, 0.2);
                     border-radius: 24px;
                     padding: 2rem;
@@ -609,7 +627,7 @@ export default function ProfilePage() {
                     align-items: flex-start;
                     margin-bottom: 1.5rem;
                     padding-bottom: 1.5rem;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    border-bottom: 1px solid var(--header-border);
                 }
 
                 .order-meta {
@@ -646,7 +664,8 @@ export default function ProfilePage() {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     font-size: 0.875rem;
                 }
 
@@ -663,12 +682,14 @@ export default function ProfilePage() {
                 .currency {
                     font-size: 0.875rem;
                     font-weight: 400;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                 }
 
                 .total-label {
                     font-size: 0.75rem;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     margin-top: 0.25rem;
                 }
 
@@ -679,7 +700,7 @@ export default function ProfilePage() {
                     display: flex;
                     flex-direction: column;
                     gap: 1rem;
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border: 1px solid var(--header-border);
                 }
 
                 .order-item {
@@ -720,22 +741,25 @@ export default function ProfilePage() {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     font-size: 0.875rem;
                 }
 
                 .item-name {
-                    color: #ffffff;
+                    color: var(--foreground);
                     font-weight: 500;
                 }
 
                 .item-quantity {
-                    color: rgba(255, 255, 255, 0.4);
+                    color: var(--foreground);
+                    opacity: 0.4;
                 }
 
                 .item-price {
                     font-family: monospace;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     font-size: 0.875rem;
                 }
 

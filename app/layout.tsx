@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Noto_Serif_Ethiopic } from "next/font/google";
 import "./globals.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,11 +36,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSerifEthiopic.variable} antialiased`}
       >
-        <Header />
-        <main style={{ paddingTop: '80px' }}>
-          {children}
-        </main>
-        <Footer />
+        <ThemeProvider>
+          <Header />
+          <main style={{ paddingTop: '80px' }}>
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

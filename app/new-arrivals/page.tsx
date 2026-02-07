@@ -91,7 +91,7 @@ export default function NewArrivalsPage() {
 
 
                 {/* Product Section */}
-                <div className="products-section backdrop-blur-md bg-[#141414]/80 border border-white/[0.08]">
+                <div className="products-section backdrop-blur-md bg-[var(--dropdown-bg)] border border-[var(--header-border)]">
                     <div className="section-header">
                         <h2 className="section-title">Fresh from the Workshop</h2>
                         <Link href="/shop" className="view-all group">
@@ -123,10 +123,10 @@ export default function NewArrivalsPage() {
 
             <style jsx>{`
                 .new-arrivals-page {
-                    background-color: #050505;
+                    background-color: var(--background);
                     min-height: 100vh;
                     padding-top: 160px;
-                    padding-bottom: 10px;
+                    padding-bottom: 2rem;
                 }
 
                 .container {
@@ -158,21 +158,22 @@ export default function NewArrivalsPage() {
 
                 .title {
                     font-family: var(--font-noto-serif-ethiopic), serif;
-                    font-size: clamp(3rem, 6vw, 5rem);
+                    font-size: clamp(2.5rem, 5vw, 5rem);
                     font-weight: 900;
                     margin-bottom: 0.5rem;
                     letter-spacing: -0.02em;
-                    color: white;
+                    color: var(--foreground);
+                    line-height: 1.1;
                 }
 
                 .subtitle {
-                    color: rgba(255, 255, 255, 0.6);
-                    font-size: 1.25rem;
+                    color: var(--foreground);
+                    opacity: 0.6;
+                    font-size: 1.125rem;
                     max-width: 600px;
                     margin: 0 auto;
                     line-height: 1.6;
                 }
-
 
                 .products-section {
                     padding: 4rem;
@@ -190,7 +191,7 @@ export default function NewArrivalsPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 2rem;
                     font-weight: 700;
-                    color: white;
+                    color: var(--foreground);
                 }
 
                 .view-all {
@@ -213,14 +214,16 @@ export default function NewArrivalsPage() {
                     gap: 2.5rem;
                 }
 
-                .loading-state {
+                .loading-state, .empty-state {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
                     padding: 60px 0;
-                    color: rgba(255, 255, 255, 0.4);
+                    color: var(--foreground);
+                    opacity: 0.4;
                     gap: 1.5rem;
+                    text-align: center;
                 }
 
                 .spinner {
@@ -233,31 +236,80 @@ export default function NewArrivalsPage() {
                     to { transform: rotate(360deg); }
                 }
 
-                .empty-state {
-                    text-align: center;
-                    padding: 60px 0;
-                    color: rgba(255, 255, 255, 0.4);
-                    font-style: italic;
+                @media (max-width: 1024px) {
+                    .products-section {
+                        padding: 3rem;
+                    }
+                    .grid {
+                        gap: 2rem;
+                    }
                 }
 
                 @media (max-width: 768px) {
                     .new-arrivals-page {
                         padding-top: 120px;
+                        padding-bottom: 2rem;
                     }
+                    
+                    .container {
+                        padding: 0 1rem;
+                    }
+
                     .arrivals-header {
-                        margin-bottom: 4rem;
+                        margin-bottom: 2.5rem;
                     }
+                    
+                    .title {
+                        font-size: 2.5rem;
+                    }
+
+                    .subtitle {
+                        font-size: 1rem;
+                        padding: 0 1rem;
+                    }
+
                     .products-section {
-                        padding: 2rem;
-                        border-radius: 32px;
+                        padding: 1.5rem;
+                        border-radius: 24px;
                     }
+
                     .section-header {
                         flex-direction: column;
                         align-items: flex-start;
                         gap: 1rem;
+                        margin-bottom: 2rem;
                     }
+                    
+                    .section-title {
+                        font-size: 1.5rem;
+                    }
+
                     .grid {
-                        gap: 1.5rem;
+                        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                        gap: 1rem;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .new-arrivals-page {
+                        padding-top: 100px;
+                    }
+                    
+                    .title {
+                        font-size: 2rem;
+                    }
+
+                    .products-section {
+                        padding: 1rem;
+                        border-radius: 20px;
+                        background: var(--dropdown-bg); 
+                    }
+                    
+                    /* Make grid 2 columns on small mobile if possible, or 1 if too cramped. 
+                       minmax(140px, 1fr) usually fits 2 on most phones (320px+) */
+                    .grid {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 0.75rem;
                     }
                 }
             `}</style>

@@ -269,7 +269,7 @@ export default function CheckoutPage() {
 
             <style jsx>{`
                 .checkout-page {
-                    background-color: #050505;
+                    background-color: var(--background);
                     min-height: 100vh;
                     padding: 8rem 2rem 4rem;
                     color: white;
@@ -288,17 +288,19 @@ export default function CheckoutPage() {
                     display: inline-flex;
                     align-items: center;
                     gap: 0.5rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                     background: transparent;
                     border: none;
                     font-size: 0.875rem;
                     cursor: pointer;
-                    transition: color 0.3s ease;
+                    transition: all 0.3s ease;
                     margin-bottom: 1.5rem;
                 }
 
                 .back-button:hover {
-                    color: white;
+                    opacity: 1;
+                    color: var(--foreground);
                 }
 
                 .page-title {
@@ -306,6 +308,7 @@ export default function CheckoutPage() {
                     font-size: 2.5rem;
                     font-weight: 800;
                     margin: 0;
+                    color: var(--foreground);
                 }
 
                 .checkout-grid {
@@ -329,11 +332,12 @@ export default function CheckoutPage() {
                     font-size: 1.5rem;
                     font-weight: 700;
                     margin-bottom: 0.5rem;
-                    color: white;
+                    color: var(--foreground);
                 }
 
                 .card-subtitle {
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     font-size: 0.9375rem;
                 }
 
@@ -351,7 +355,8 @@ export default function CheckoutPage() {
                     display: block;
                     font-size: 0.875rem;
                     font-weight: 600;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                     margin-bottom: 0.75rem;
                     text-transform: uppercase;
                     letter-spacing: 0.05em;
@@ -361,8 +366,8 @@ export default function CheckoutPage() {
                     display: flex;
                     align-items: center;
                     gap: 1rem;
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--background);
+                    border: 1px solid var(--header-border);
                     border-radius: 12px;
                     padding: 0.25rem 1rem;
                     transition: all 0.3s ease;
@@ -371,10 +376,12 @@ export default function CheckoutPage() {
                 .input-wrapper:focus-within {
                     border-color: #3b82f6;
                     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+                    background: var(--dropdown-bg);
                 }
 
                 .input-icon {
-                    color: rgba(255, 255, 255, 0.4);
+                    color: var(--foreground);
+                    opacity: 0.4;
                     flex-shrink: 0;
                 }
 
@@ -382,7 +389,7 @@ export default function CheckoutPage() {
                     width: 100%;
                     background: transparent;
                     border: none;
-                    color: white;
+                    color: var(--foreground);
                     font-size: 1rem;
                     padding: 0.875rem 0;
                 }
@@ -394,13 +401,14 @@ export default function CheckoutPage() {
                 }
                 
                 input::placeholder {
-                    color: rgba(255, 255, 255, 0.2);
+                    color: var(--foreground);
+                    opacity: 0.2;
                 }
 
                 .payment-method-preview {
                     margin: 2rem 0;
                     padding-top: 2rem;
-                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                    border-top: 1px solid var(--header-border);
                 }
 
                 .payment-title {
@@ -409,7 +417,8 @@ export default function CheckoutPage() {
                     margin-bottom: 1rem;
                     text-transform: uppercase;
                     letter-spacing: 0.05em;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                 }
 
                 .payment-option {
@@ -436,12 +445,13 @@ export default function CheckoutPage() {
                 .payment-name {
                     display: block;
                     font-weight: 700;
-                    color: white;
+                    color: var(--foreground);
                 }
 
                 .payment-desc {
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                 }
 
                 .submit-button {
@@ -475,7 +485,8 @@ export default function CheckoutPage() {
                     justify-content: center;
                     gap: 0.5rem;
                     font-size: 0.8125rem;
-                    color: rgba(255, 255, 255, 0.4);
+                    color: var(--foreground);
+                    opacity: 0.4;
                 }
 
                 .sticky-card {
@@ -503,8 +514,8 @@ export default function CheckoutPage() {
                     height: 64px;
                     border-radius: 12px;
                     overflow: hidden;
-                    background: #0d0d0d;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--background);
+                    border: 1px solid var(--header-border);
                 }
 
                 .item-image {
@@ -533,7 +544,7 @@ export default function CheckoutPage() {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 2px solid #141414;
+                    border: 2px solid var(--background);
                 }
 
                 .item-info {
@@ -542,13 +553,15 @@ export default function CheckoutPage() {
 
                 .item-name {
                     font-weight: 600;
-                    color: rgba(255, 255, 255, 0.9);
+                    color: var(--foreground);
+                    opacity: 0.9;
                     margin-bottom: 0.25rem;
                 }
 
                 .item-price {
                     font-size: 0.875rem;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                 }
 
                 .pricing-breakdown {
@@ -561,7 +574,8 @@ export default function CheckoutPage() {
                     display: flex;
                     justify-content: space-between;
                     font-size: 0.9375rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                 }
 
                 .price-row.highlight-green {
@@ -571,12 +585,13 @@ export default function CheckoutPage() {
                 .price-row.total {
                     font-size: 1.25rem;
                     font-weight: 700;
-                    color: white;
+                    color: var(--foreground);
                 }
 
                 .divider {
                     height: 1px;
                     margin: 0.5rem 0;
+                    background: var(--header-border);
                 }
                 
                 .error-message {

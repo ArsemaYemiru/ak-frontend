@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, ShoppingCart, User, Menu, X, ChevronDown, Sparkles, Gem, Crown, Zap, Layers } from 'lucide-react';
+import { ShoppingCart, User, Menu, X, ChevronDown, Sparkles, Gem, Crown, Zap, Layers, Sun, Moon } from 'lucide-react';
 import { useCartStore, useAuthStore } from '@/lib/store';
-
+import { useTheme } from '../context/ThemeContext';
 import { useRouter } from 'next/navigation';
 
 export default function Header() {
@@ -13,6 +13,7 @@ export default function Header() {
     const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
     const { items } = useCartStore();
     const { user } = useAuthStore();
+    const { theme, toggleTheme } = useTheme();
     const router = useRouter();
 
     useEffect(() => {
@@ -88,8 +89,12 @@ export default function Header() {
 
                 {/* Actions */}
                 <div className="actions">
-                    <button className="action-btn desktop-only" aria-label="Search">
-                        <Search size={22} />
+                    <button
+                        className="action-btn"
+                        onClick={toggleTheme}
+                        aria-label="Toggle theme"
+                    >
+                        {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
                     </button>
                     <Link href="/cart" className="action-btn cart-btn" aria-label="Shopping Cart">
                         <div className="cart-icon-wrapper">
@@ -147,11 +152,11 @@ export default function Header() {
                 }
 
                 .header.scrolled {
-                    background-color: rgba(10, 10, 10, 0.95);
+                    background-color: var(--header-bg);
                     backdrop-filter: blur(20px);
                     padding: 1rem 0;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                    border-bottom: 1px solid var(--header-border);
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
                 }
 
                 .header-container {
@@ -169,18 +174,18 @@ export default function Header() {
                     gap: 0.75rem;
                     font-size: 1.5rem;
                     font-weight: 800;
-                    color: white;
+                    color: var(--foreground);
                     letter-spacing: 0.1em;
                     text-transform: uppercase;
                     transition: all 0.3s ease;
                 }
 
                 .logo:hover {
-                    color: #d4af37;
+                    color: var(--accent-gold);
                 }
 
                 .logo-icon {
-                    color: #3b82f6;
+                    color: var(--primary);
                     animation: sparkle 2s ease-in-out infinite;
                 }
 
@@ -203,7 +208,8 @@ export default function Header() {
                 }
 
                 .nav-link {
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     font-size: 0.875rem;
                     font-weight: 600;
                     letter-spacing: 0.05em;
@@ -219,12 +225,13 @@ export default function Header() {
                     left: 0;
                     width: 0;
                     height: 2px;
-                    background: #d4af37;
+                    background: var(--accent-gold);
                     transition: width 0.3s ease;
                 }
 
                 .nav-link:hover {
-                    color: white;
+                    color: var(--foreground);
+                    opacity: 1;
                 }
 
                 .nav-link:hover::after {
@@ -253,9 +260,9 @@ export default function Header() {
                     top: calc(100% + 1.5rem);
                     left: 50%;
                     transform: translateX(-50%);
-                    background: rgba(20, 20, 20, 0.98);
+                    background: var(--dropdown-bg);
                     backdrop-filter: blur(20px);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border: 1px solid var(--dropdown-border);
                     border-radius: 20px;
                     padding: 1rem;
                     min-width: 280px;
@@ -263,7 +270,7 @@ export default function Header() {
                     visibility: hidden;
                     transform: translateX(-50%) translateY(-10px);
                     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
                     display: flex;
                     flex-direction: column;
                     gap: 0.25rem;
@@ -280,7 +287,8 @@ export default function Header() {
                     align-items: center;
                     gap: 1rem;
                     padding: 1rem 1.25rem;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     font-size: 0.9375rem;
                     font-weight: 600;
                     border-radius: 14px;
@@ -299,7 +307,7 @@ export default function Header() {
                     top: 0;
                     bottom: 0;
                     width: 3px;
-                    background: #d4af37;
+                    background: var(--accent-gold);
                     transform: scaleY(0);
                     transition: transform 0.2s ease;
                 }
@@ -307,17 +315,20 @@ export default function Header() {
                 .dropdown-item:hover {
                     background: rgba(212, 175, 55, 0.1);
                     border-color: rgba(212, 175, 55, 0.2);
-                    color: #d4af37;
+                    color: var(--accent-gold);
+                    opacity: 1;
                     transform: translateX(6px);
                 }
 
                 .dropdown-item-icon {
-                    color: rgba(255, 255, 255, 0.4);
+                    color: var(--foreground);
+                    opacity: 0.4;
                     transition: color 0.2s ease;
                 }
 
                 .dropdown-item:hover .dropdown-item-icon {
-                    color: #d4af37;
+                    color: var(--accent-gold);
+                    opacity: 1;
                 }
 
                 .dropdown-item:hover::before {
@@ -331,7 +342,7 @@ export default function Header() {
                 }
 
                 .action-btn {
-                    color: white;
+                    color: var(--foreground);
                     transition: all 0.3s ease;
                     position: relative;
                     display: flex;
@@ -344,7 +355,7 @@ export default function Header() {
 
                 .action-btn:hover {
                     transform: translateY(-2px);
-                    color: #d4af37;
+                    color: var(--accent-gold);
                 }
 
                 .cart-icon-wrapper {
@@ -358,7 +369,7 @@ export default function Header() {
                     position: absolute;
                     top: -12px;
                     right: -12px;
-                    background: #d4af37;
+                    background: var(--accent-gold);
                     color: #000000;
                     font-size: 11px;
                     font-weight: 700;
@@ -376,7 +387,7 @@ export default function Header() {
 
                 .mobile-toggle {
                     display: none;
-                    color: white;
+                    color: var(--foreground);
                     z-index: 1001;
                     background: transparent;
                     border: none;
@@ -386,7 +397,7 @@ export default function Header() {
                 .mobile-menu {
                     position: fixed;
                     inset: 0;
-                    background: #0a0a0a;
+                    background: var(--background);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -420,7 +431,8 @@ export default function Header() {
                 }
 
                 .mobile-section-title {
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     font-size: 0.875rem;
                     font-weight: 700;
                     text-transform: uppercase;
@@ -432,34 +444,36 @@ export default function Header() {
                     display: block;
                     font-size: 1.25rem;
                     font-weight: 600;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     padding: 0.75rem;
                     transition: all 0.3s ease;
                     text-decoration: none;
                 }
 
                 .mobile-link:hover {
-                    color: #d4af37;
+                    color: var(--accent-gold);
+                    opacity: 1;
                     transform: translateX(8px);
                 }
 
                 .mobile-link-main {
                     font-size: 1.75rem;
                     font-weight: 700;
-                    color: white;
+                    color: var(--foreground);
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
                     transition: all 0.3s ease;
                 }
 
                 .mobile-link-main:hover {
-                    color: #d4af37;
+                    color: var(--accent-gold);
                 }
 
                 .mobile-divider {
                     width: 100%;
                     height: 1px;
-                    background: rgba(255, 255, 255, 0.1);
+                    background: var(--dropdown-border);
                     margin: 1rem 0;
                 }
 

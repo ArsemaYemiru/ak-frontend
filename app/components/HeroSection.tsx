@@ -1,17 +1,34 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { HeroContent } from '../types';
 import { ArrowRight, Sparkles } from 'lucide-react';
+
+import { useTheme } from '../context/ThemeContext';
 
 interface HeroSectionProps {
   content: HeroContent;
 }
 
 export default function HeroSection({ content }: HeroSectionProps) {
+  const { theme } = useTheme();
+  const backgroundImage = (theme === 'light' && content.backgroundImageLight)
+    ? content.backgroundImageLight
+    : content.backgroundImage;
+
   return (
     <section className="hero">
-      <div className="hero-background" style={{ backgroundImage: `url('${content.backgroundImage}')` }} />
+      <div className="hero-background">
+        <Image
+          src={backgroundImage}
+          alt="Hero background"
+          fill
+          quality={100}
+          priority
+          className="hero-background-image"
+        />
+      </div>
       <div className="hero-overlay">
         {/* Ambient Glows */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none mix-blend-overlay animate-pulse" />
@@ -49,9 +66,12 @@ export default function HeroSection({ content }: HeroSectionProps) {
         .hero-background {
             position: absolute;
             inset: 0;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+
+        .hero-background-image {
+            object-fit: cover;
+            object-position: center;
             transform: scale(1.05);
             animation: slowZoom 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -66,9 +86,9 @@ export default function HeroSection({ content }: HeroSectionProps) {
           inset: 0;
           background: linear-gradient(
               to bottom,
-              rgba(5, 5, 5, 0.3) 0%,
-              rgba(5, 5, 5, 0.6) 50%,
-              rgba(5, 5, 5, 0.95) 100%
+              rgba(10, 10, 10, 0.3) 0%,
+              rgba(10, 10, 10, 0.7) 50%,
+              var(--background) 100%
           );
           display: flex;
           align-items: center;

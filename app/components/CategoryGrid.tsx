@@ -24,7 +24,7 @@ export default function CategoryGrid({ categories }: CategoryGridProps) {
       <style jsx>{`
         .category-section {
           padding: 8rem 2rem;
-          background-color: #0a0a0a;
+          background-color: var(--background);
         }
 
         .container {
@@ -43,7 +43,7 @@ export default function CategoryGrid({ categories }: CategoryGridProps) {
           font-family: var(--font-noto-serif-ethiopic), serif;
           font-size: 3rem;
           font-weight: 800;
-          color: white;
+          color: var(--foreground);
           text-align: center;
           margin-bottom: 1.5rem;
           letter-spacing: -0.02em;
@@ -52,7 +52,7 @@ export default function CategoryGrid({ categories }: CategoryGridProps) {
         .title-accent {
             width: 60px;
             height: 4px;
-            background-color: #3b82f6;
+            background-color: #d4af37;
             border-radius: 2px;
         }
 

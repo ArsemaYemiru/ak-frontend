@@ -4,10 +4,33 @@
 
 :root {
   --background: #0a0a0a;
+  --background-rgb: 10, 10, 10;
   --foreground: #ffffff;
+  --foreground-rgb: 255, 255, 255;
   --primary: #3b82f6;
   --accent-gold: #d4af37;
   --accent-blue: #3b82f6;
+
+  /* Header specific */
+  --header-bg: rgba(10, 10, 10, 0.95);
+  --header-border: rgba(255, 255, 255, 0.05);
+  --dropdown-bg: rgba(20, 20, 20, 0.98);
+  --dropdown-border: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] {
+  --background: #ffffff;
+  --background-rgb: 255, 255, 255;
+  --foreground: #000000;
+  --foreground-rgb: 0, 0, 0;
+  --primary: #d4af37;
+  /* Gold as primary for light mode */
+
+  /* Header specific - light */
+  --header-bg: rgba(255, 255, 255, 0.95);
+  --header-border: rgba(0, 0, 0, 0.05);
+  --dropdown-bg: rgba(255, 255, 255, 0.98);
+  --dropdown-border: rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -42,14 +65,14 @@ button {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0d0d0d;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
+  background: var(--header-border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4af37;
+  background: var(--primary);
 }

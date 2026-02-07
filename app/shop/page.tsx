@@ -151,7 +151,7 @@ export default function ShopPage() {
 
             <style jsx>{`
                 .shop-page {
-                    background-color: #0a0a0a;
+                    background-color: var(--background);
                     min-height: 100vh;
                     padding-top: 80px;
                     padding-bottom: 80px;
@@ -183,14 +183,15 @@ export default function ShopPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: clamp(2.5rem, 5vw, 4rem);
                     font-weight: 800;
-                    color: white;
+                    color: var(--foreground);
                     margin-bottom: 1.5rem;
                     letter-spacing: -0.02em;
                     transition: border-color 0.3s ease;
                 }
 
                 .shop-description {
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                     font-size: 1.125rem;
                     max-width: 600px;
                     line-height: 1.6;
@@ -201,10 +202,10 @@ export default function ShopPage() {
                     flex-direction: column;
                     gap: 2rem;
                     margin-bottom: 4rem;
-                    background-color: #141414;
+                    background-color: var(--dropdown-bg);
                     padding: 2rem;
                     border-radius: 24px;
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border: 1px solid var(--dropdown-border);
                     transition: all 0.3s ease;
                 }
 
@@ -232,18 +233,19 @@ export default function ShopPage() {
 
                 .search-box input {
                     width: 100%;
-                    background-color: #0d0d0d;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background-color: var(--background);
+                    border: 1px solid var(--header-border);
                     border-radius: 12px;
                     padding: 0.875rem 1rem 0.875rem 3.5rem;
-                    color: white;
+                    color: var(--foreground);
                     font-size: 1rem;
                     transition: all 0.3s ease;
                 }
 
                 .search-box input:focus {
                     outline: none;
-                    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+                    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+                    border-color: var(--accent-gold);
                 }
 
                 .category-filters {
@@ -253,9 +255,10 @@ export default function ShopPage() {
                 }
 
                 .filter-btn {
-                    background-color: #0d0d0d;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    color: rgba(255, 255, 255, 0.6);
+                    background-color: var(--background);
+                    border: 1px solid var(--header-border);
+                    color: var(--foreground);
+                    opacity: 0.6;
                     padding: 0.75rem 1.5rem;
                     border-radius: 12px;
                     font-size: 0.875rem;
@@ -265,12 +268,14 @@ export default function ShopPage() {
                 }
 
                 .filter-btn:hover {
-                    border-color: rgba(255, 255, 255, 0.3);
-                    color: white;
+                    border-color: rgba(212, 175, 55, 0.3);
+                    color: var(--foreground);
+                    opacity: 1;
                 }
 
                 .filter-btn.active {
-                    color: white;
+                    color: black !important; /* Always black text on active gold button */
+                    opacity: 1;
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
                 }
 
@@ -286,7 +291,8 @@ export default function ShopPage() {
                     align-items: center;
                     justify-content: center;
                     padding: 100px 0;
-                    color: rgba(255, 255, 255, 0.4);
+                    color: var(--foreground);
+                    opacity: 0.4;
                     gap: 1.5rem;
                 }
 
@@ -302,31 +308,33 @@ export default function ShopPage() {
                 .empty-state {
                     text-align: center;
                     padding: 80px 0;
-                    background-color: #141414;
+                    background-color: var(--dropdown-bg);
                     border-radius: 32px;
-                    border: 1px dashed rgba(255, 255, 255, 0.1);
+                    border: 1px dashed var(--dropdown-border);
                 }
 
                 .empty-icon {
                     width: 64px;
                     height: 64px;
-                    background-color: #0d0d0d;
+                    background-color: var(--background);
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     margin: 0 auto 1.5rem;
-                    color: rgba(255, 255, 255, 0.4);
+                    color: var(--foreground);
+                    opacity: 0.4;
                 }
 
                 .empty-state h3 {
-                    color: white;
+                    color: var(--foreground);
                     font-size: 1.5rem;
                     margin-bottom: 0.5rem;
                 }
 
                 .empty-state p {
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     max-width: 400px;
                     margin: 0 auto 2rem;
                 }

@@ -26,7 +26,7 @@ export default function NewArrivals({ products }: NewArrivalsProps) {
       <style jsx>{`
         .new-arrivals-section {
           padding: 5rem 2rem;
-          background-color: #0a0a0a;
+          background-color: var(--background);
         }
 
         .section-header {
@@ -41,7 +41,7 @@ export default function NewArrivals({ products }: NewArrivalsProps) {
           font-family: var(--font-noto-serif-ethiopic), serif;
           font-size: 1.75rem;
           font-weight: 600;
-          color: white;
+          color: var(--foreground);
           margin: 0;
           letter-spacing: 0.1em;
         }

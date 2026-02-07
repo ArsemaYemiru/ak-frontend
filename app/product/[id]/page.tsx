@@ -101,7 +101,7 @@ export default function ProductDetailPage() {
 
                 <style jsx>{`
                     .product-detail-page {
-                        background-color: #0a0a0a;
+                        background-color: var(--background);
                         min-height: 100vh;
                         display: flex;
                         align-items: center;
@@ -110,7 +110,8 @@ export default function ProductDetailPage() {
 
                     .loading-container {
                         text-align: center;
-                        color: rgba(255, 255, 255, 0.6);
+                        color: var(--foreground);
+                        opacity: 0.6;
                     }
 
                     .spinner {
@@ -126,8 +127,8 @@ export default function ProductDetailPage() {
                     @keyframes spin {
                         to { transform: rotate(360deg); }
                     }
-                `}</style>
-            </div>
+            `}</style>
+            </div >
         );
     }
 
@@ -142,7 +143,7 @@ export default function ProductDetailPage() {
 
                 <style jsx>{`
                     .product-detail-page {
-                        background-color: #0a0a0a;
+                        background-color: var(--background);
                         min-height: 100vh;
                         display: flex;
                         align-items: center;
@@ -152,7 +153,7 @@ export default function ProductDetailPage() {
 
                     .not-found {
                         text-align: center;
-                        color: white;
+                        color: var(--foreground);
                     }
 
                     .not-found h1 {
@@ -162,7 +163,8 @@ export default function ProductDetailPage() {
                     }
 
                     .not-found p {
-                        color: rgba(255, 255, 255, 0.6);
+                        color: var(--foreground);
+                        opacity: 0.6;
                         margin-bottom: 2rem;
                     }
 
@@ -275,7 +277,7 @@ export default function ProductDetailPage() {
 
             <style jsx>{`
                 .product-detail-page {
-                    background-color: #0a0a0a;
+                    background-color: var(--background);
                     min-height: 100vh;
                     padding: 8rem 2rem 4rem;
                 }
@@ -289,18 +291,20 @@ export default function ProductDetailPage() {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: var(--foreground);
+                    opacity: 0.6;
                     background: transparent;
                     border: none;
                     font-size: 0.9375rem;
                     cursor: pointer;
-                    transition: color 0.3s ease;
+                    transition: all 0.3s ease;
                     margin-bottom: 3rem;
                     padding: 0.5rem 0;
                 }
 
                 .back-button:hover {
-                    color: white;
+                    opacity: 1;
+                    color: var(--foreground);
                 }
 
                 .product-grid {
@@ -322,8 +326,8 @@ export default function ProductDetailPage() {
                     aspect-ratio: 1;
                     border-radius: 24px;
                     overflow: hidden;
-                    background: #141414;
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    background: var(--background);
+                    border: 1px solid var(--header-border);
                 }
 
                 .image-wrapper :global(.product-image) {
@@ -367,7 +371,7 @@ export default function ProductDetailPage() {
                     font-family: var(--font-noto-serif-ethiopic), serif;
                     font-size: 3rem;
                     font-weight: 900;
-                    color: white;
+                    color: var(--foreground);
                     line-height: 1.2;
                     margin-bottom: 1.5rem;
                     letter-spacing: -0.02em;
@@ -383,14 +387,15 @@ export default function ProductDetailPage() {
 
                 .divider {
                     height: 1px;
-                    background: rgba(255, 255, 255, 0.1);
+                    background: var(--header-border);
                     margin: 2rem 0;
                 }
 
                 .section-label {
                     font-size: 0.875rem;
                     font-weight: 700;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: var(--foreground);
+                    opacity: 0.5;
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
                     margin-bottom: 1rem;
@@ -403,7 +408,8 @@ export default function ProductDetailPage() {
                 .product-description {
                     font-size: 1.125rem;
                     line-height: 1.8;
-                    color: rgba(255, 255, 255, 0.8);
+                    color: var(--foreground);
+                    opacity: 0.8;
                 }
 
                 .material-section {
@@ -412,7 +418,8 @@ export default function ProductDetailPage() {
 
                 .material-text {
                     font-size: 1rem;
-                    color: rgba(255, 255, 255, 0.7);
+                    color: var(--foreground);
+                    opacity: 0.7;
                     font-weight: 500;
                 }
 
@@ -428,10 +435,11 @@ export default function ProductDetailPage() {
                     align-items: center;
                     gap: 0.5rem;
                     padding: 0.75rem 1.25rem;
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: var(--background);
+                    border: 1px solid var(--header-border);
                     border-radius: 50px;
-                    color: rgba(255, 255, 255, 0.8);
+                    color: var(--foreground);
+                    opacity: 0.8;
                     font-size: 0.9375rem;
                 }
 
